@@ -1,0 +1,235 @@
+%button.filter-search-mobile.visible-xs(type = "button" ng-click="small = !small") Поиск
+
+.search-small(ng-show="small" )
+
+
+  .filter-left.visible-xs(ng-mouseover="mouse=false")
+    .filter-comission
+      .checkbox-commission
+        %button.map-button(type="button"   ng-model="search.commission" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" )
+          .active-map
+        %small
+          Без комиссии
+    .radio-button
+      %input#radio1_mob{"ng-model" => "search.living", :type => "radio", :value => "0"}
+      %label.blue{:for => "radio1_mob"}
+      .radio-button-title
+        Коммерческая
+      %br
+      %input#radio2_mob{"ng-model" => "search.living", :type => "radio", :value => "1"}
+      %label.blue{:for => "radio2_mob"}
+      .radio-button-title
+        Жилая
+      %br
+      %input#radio3_mob{"ng-model" => "search.living", :type => "radio", :value => ""}
+      %label.blue{:for => "radio3_mob"}
+      .radio-button-title
+        Любая
+
+    .radio-button.operation
+
+      .area-all
+        %input#by_all1_mob{'ng-model' => 'search.operation', :type => 'radio', :value => '0'}
+        %label.blue{:for => "by_all1_mob"}
+        .radio-button-title
+          Аренда
+      .area-m2
+        %input#by_all2_mob{'ng-model' => 'search.operation', :type => 'radio', :value => '1'}/
+        %label.blue{:for => "by_all2_mob"}
+        .radio-button-title
+          Продажа
+    .dropdown
+
+      .dropdawn-category
+        %multiselect.input-xlarge(name = "Категория" name2 = "Категории"){:change => "selected()", :multiple => "true", "ng-model" => "category", :options => "value.name for value in categories"}
+
+      .dropdown-city
+        .regins-select-left
+          .btn-toolbar
+            .demo{"ng-repeat" => "btn in btns"}
+              .btn-group
+                %div{:btncls => "btn-mini w140 btn-success", :callback => "processRes(res)", "is-enabled" => "isOn(btn)", :label => "{{btn.label}}", "ng-tree-btn" => "guests"}
+
+
+
+      .dropdown-metro
+        %multiselect.input-xlarge(name = "Метро" name2 = "Метро"){:change => "selected()", :multiple => "true", "ng-model" => "metro", :options => "value.name for value in metro_stations"}
+
+    .price-area
+      .filter-price
+        .input-price
+          .price-text
+            %label.right.inline Цена
+          .float-left.price-input1
+            %input(ng-model='price_min' ng-maxlength='8'  ng-minlength='1' ng-init='check=true' ng-change='check=!true' ng-pattern='/[0-9]/' placeholder='От'  value="{{price_min}}" ){:type => 'text'}/
+          .float-left.price-text
+            %label.right.inline -
+          .float-left.price-input2
+            %input(ng-model='price_max' ng-maxlength='8' ng-minlength='1' ng-change='check=!true' ng-pattern='/[0-9]/' placeholder='До' value="{{price_max}}" ){:type => 'text'}/
+
+      .radio-button-price
+        .area-all
+          %input#by_all3_mob{'ng-model' => 'by_all', :type => 'radio', :value => '1'}
+          %label.blue{:for => "by_all3_mob"}
+          .radio-button-title
+            Общая
+        .area-m2
+          %input#by_all4_mob{'ng-model' => 'by_all', :type => 'radio', :value => '0'}/
+          %label.blue{:for => "by_all4_mob"}
+          .radio-button-title
+            За метр
+      .price-area
+        .filter-price
+          .input-price
+            .price-text
+              %label.right.inline Площадь
+            .float-left.price-input1
+              %input(ng-model='search.area_min' ng-maxlength='6' ng-minlength='1'ng-pattern='/[0-9]/' placeholder=''  value="{{area_min}}" placeholder='От'){:type => 'text'}
+            .float-left.price-text
+              %label.right.inline -
+            .float-left.price-input2
+              %input(ng-model='search.area_max' ng-maxlength='6' ng-minlength='1'ng-pattern='/[0-9]/'  placeholder='' value="{{area_max}}" placeholder='До'){:type => 'text'}/
+
+
+
+    .filter-map
+      .float-left.map-text
+        %label Карта
+      .map-input
+        .checkbox-map
+
+
+          %small
+            вкл
+          %button.map-button{"btn-radio" => "1", "ng-model" => "search.map", :type => "button"}
+            .active-map
+        .checkbox-map
+
+          %small
+            выкл
+          %button.map-button{"btn-radio" => "0", "ng-model" => "search.map", :type => "button"}
+            .active-map
+    .price-area
+
+      .radio-button-free
+        .area-all
+          %input#free1_mob{'ng-model' => 'free', :type => 'radio', :value => '1'}
+          %label.blue{:for => "free1_mob"}
+          .radio-button-title
+            Свободно
+        .area-m2
+          %input#free2_mob{'ng-model' => 'free', :type => 'radio', :value => '0'}/
+          %label.blue{:for => "free2_mob"}
+          .radio-button-title
+            Арендовано
+
+    %form.search-form-left
+      %input.search-input(ng-model='search.marking' ng-maxlength='8' ng-minlength='1'ng-pattern='/[0-9]/' smart-float   value="{{search.marking}}"){:placeholder => "Поиск по ID"}
+      %button.btn-search-article(ng-click="searchMarking()"){:type => "button"}
+
+      %br
+      %button.btn-clean-form(ng-click="cleanMobile()"){:type => "button"}
+        Очистить фильтр
+
+      %button.filter-search(ng-click="search()")
+        .filter-tringle
+-#    .radio-button
+-#      %input#radio1m{"ng-model" => "search.living", :type => "radio", :value => "0"}
+-#      %label.blue{:for => "radio1m"}
+-#      .radio-button-title
+-#        Комерческая
+-#      %br
+-#      %input#radio2m{"ng-model" => "search.living", :type => "radio", :value => "1"}
+-#      %label.blue{:for => "radio2m"}
+-#      .radio-button-title
+-#        Жилая
+-#      %br
+-#      %input#radio3m{"ng-model" => "search.living", :type => "radio", :value => ""}
+-#      %label.blue{:for => "radio3m"}
+-#      .radio-button-title
+-#        Любая
+-#    .dropdown
+-#
+-#      .dropdawn-category
+-#        %select(ui-select2="select2Options" ng-init="select2Options.placeholder='test'" multiple="multiple"  ng-model='category' select_bind ng-cloak  data-placeholder='Категория')
+-#          %option(ng-repeat="category in categories" ng-cloak value="{{category.id}}")
+-#            {{category.name}}
+-#
+-#      .dropdown-operation
+-#        %select(ui-select2="select2Options" ng-init="select2Options.placeholder='test'" multiple="multiple"  ng-model='operation' select_bind ng-cloak  data-placeholder='Операция')
+-#          %option(ng-repeat="operation in operations" ng-cloak value="{{operation.id}}")
+-#            {{operation.name}}
+-#
+-#      .dropdown-city
+-#        %select(ui-select2="select2Options" multiple="multiple" ng-model='city' select_city ng-cloak  data-placeholder='Выберите город')
+-#          %optgroup(ng-repeat="region in regions"){:label=> "{{region.name}}"}
+-#            %option(ng-repeat='city in region.cities' ng-cloak value='{{city.id}}')
+-#              {{city.name}}
+-#    .price-area
+-#      .filter-price
+-#        .input-price
+-#          .price-text
+-#            %label.right.inline Цена
+-#          .float-left.price-input1
+-#            %input.input_bind(ng-model='price_min' ng-maxlength='6'  ng-minlength='1' ng-init='check=true' ng-change='check=!true' ng-pattern='/[0-9]/' placeholder='От'  value="{{price_min}}" ){:type => 'text'}/
+-#          .float-left.price-text
+-#            %label.right.inline -
+-#          .float-left.price-input2
+-#            %input.input_bind(ng-model='price_max' ng-maxlength='6' ng-minlength='1' ng-change='check=!true' ng-pattern='/[0-9]/' placeholder='До' value="{{price_max}}" ){:type => 'text'}/
+-#
+-#      .radio-button-price
+-#        .area-all
+-#          %input.input_bind#by_all1m{'ng-model' => 'search.by_all', :type => 'radio', :value => '1'}
+-#          %label.blue{:for => "by_all1m"}
+-#          .radio-button-title
+-#            Общая
+-#        .area-m2
+-#          %input.input_bind#by_all2m{'ng-model' => 'search.by_all', :type => 'radio', :value => '0'}/
+-#          %label.blue{:for => "by_all2m"}
+-#          .radio-button-title
+-#            За метр2
+-#      .filter-area
+-#        .float-left.area-text
+-#          %label.right.inline Площадь:
+-#        .float-left.area-inpet
+-#          %input.input_bind(ng-model='area_min' ng-maxlength='6' ng-minlength='1'ng-pattern='/[0-9]/' placeholder=''  value="{{area_min}}" smart-float ){:type => 'text'}/
+-#        .float-left.price-text
+-#          %label.right.inline -
+-#        .float-left.area-inpet
+-#          %input.input_bind(ng-model='area_max' ng-maxlength='6' ng-minlength='1'ng-pattern='/[0-9]/'  placeholder='' value="{{area_max}}" smart-float ){:type => 'text'}/
+-#    -#.filter-map
+-#    -#  .are-text
+-#    -#    %label Площадь, м2
+-#    -#  .area-vel-right
+-#    -#    {{search.area_max}}
+-#    -#  .area-vel-left
+-#    -#    {{search.area_min}}
+-#    -#  %slider{:ceiling => "{{maxArea}}", :floor => "{{minArea}}", "ng-model-high" => "search.area_max", "ng-model-low" => "search.area_min" }
+-#    .filter-map
+-#      .float-left.map-text
+-#        %label Карта
+-#      .map-input
+-#        .checkbox-map
+-#
+-#
+-#          %small
+-#            вкл
+-#          %button.map-button{"btn-radio" => "1", "ng-model" => "search.map", :type => "button"}
+-#            .active-map
+-#          -#%input.input_bind{'ng-model' => 'map', :type => 'radio', :value => '1'}
+-#
+-#        .checkbox-map
+-#
+-#          %small
+-#            выкл
+-#          %button.map-button{"btn-radio" => "0", "ng-model" => "search.map", :type => "button"}
+-#            .active-map
+-#          -#%input.input_bind{'ng-model' => 'map', :type => 'radio', :value => '0'}/
+-#    %form.search-form-left
+-#      %input.search-input(ng-model='search.marking' ng-maxlength='8' ng-minlength='2'ng-pattern='/[0-9]/' smart-float   value="{{search.marking}}"){:placeholder => "Артикул"}
+-#      %button.btn-search(ng-click="searchMarking()"){:type => "button"}
+-#
+-#    %button.filter-search(ng-click="search()")
+-#      .filter-tringle
+-#
+-#.include-example(ng-show="filterShow" ng-include="'catalog.html'" )

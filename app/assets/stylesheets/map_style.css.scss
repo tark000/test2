@@ -1,0 +1,52 @@
+#map-canvas img {
+  max-width: none;
+}
+#map-canvas label {
+  width: auto;
+  display: inline;
+}
+
+.mapOne {
+  height: 400px;
+  max-width: 100%;
+}
+
+#myMapOne{
+  height: 355px;
+  max-width: 100%;
+}
+
+
+
+#myMap{
+  height: 355px;
+
+}
+
+
+.map {
+  height: 600px;
+  max-width: 100%;
+}
+
+.map {
+  display: block;
+}
+
+.map img {
+  max-width: inherit !important;
+}
+
+.map img, object, embed {
+
+}
+
+.map_little {
+  height: 355px;
+  max-width: 100%;
+}
+
+.show-map{
+  margin-right: 0;
+  margin-left: 0;
+}

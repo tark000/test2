@@ -1,0 +1,16 @@
+.row.show-map
+  .large-6.columns
+    %gm-map(gm-map-id="'myMapOne'"  gm-center="options.map.center"  class="mapOne" gm-zoom="options.map.zoom" gm-map-type-id="mapTypeId")
+      %gm-markers(gm-objects="markers" gm-id="object.id"  gm-position="{ lat: object.location.lat, lng: object.location.lng }"
+      gm-marker-options="getAdvertOpts(object)" gm-on-click="selectAdvert(object, marker)")
+
+
+
+
+
+
+
+
+
+
+

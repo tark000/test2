@@ -1,0 +1,29 @@
+{
+  "name": "render.js",
+  "version": "0.0.1",
+  "description": "render angular for google indexing",
+  "main": "get_html.js",
+  "dependencies": {
+    "express": "~3.3.8",
+    "phantom-proxy": "~0.1.792",
+    "stdio": "~0.1.0",
+    "phantomjs": "~1.9.1-9",
+    "node-phantom": "~0.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Stas Koval",
+  "license": "BSD-2-Clause",
+  "keywords": [
+    "angular",
+    "google",
+    "indexing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:skoval/house-angular.git"
+  }
+}

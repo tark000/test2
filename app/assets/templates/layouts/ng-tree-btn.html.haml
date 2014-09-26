@@ -1,0 +1,74 @@
+-#/ Multi select with tree and Confirm btn
+-#.btn-group
+-#  %button.btn.dropdown-toggle(style="color:#6d747b;"){:class => "{{btnCls}}", "ng-class" => "{disabled: !isEnabled()}", "ng-click" => "toggleDrop()"}
+-#    Город
+-#  %ul.dropdown-menu.block(document-click='click($event)' ){"ng-show" => "opened"}
+-#    %li
+-#      / <a class="multiAll" ng-click="selectItem(options)">All
+-#      / <span class="icon-ok" ng-show="checked(options)"></span>
+-#      / </a>
+-#      %ul.menu(ng-mouseover="mouse = true" ng-mouseleave="mouse = false")
+-#        %li{"ng-repeat" => "item in options.items"}
+-#
+-#          .city-plus(style="float:left" ng-click="item.show = !item.show")
+-#            .pluss(ng-hide="item.show")
+-#              +
+-#            .minus(ng-show="item.show") -
+-#
+-#          %a.multicheck(style="color:#cc00cc;"){"ng-click" => "selectItem(item)", "ng-show" => "!hasChildren(item)"}
+-#            {{item.name}}
+-#            %span.icon-ok{"ng-show" => "checked(item)"}
+-#          %a.multiAll{"ng-click" => "selectItem(item)", "ng-show" => "hasChildren(item)"}
+-#            {{item.name}}
+-#            %span.icon-ok{"ng-show" => "checked(item)"}
+-#          %ul.menu{"ng-show" => "hasChildren(item)"}
+-#            %li(ng-show="item.show"){"ng-repeat" => "option in item.items"}
+-#              %a.multicheck{"ng-click" => "selectItem(option)"}
+-#                {{option.name}}
+-#                %span.icon-ok{"ng-show" => "checked(option)"}
+-#    / <li class="centered">
+-#    / <button class="btn btn-mini btn-info saveMultiAll" ng-click="confirmMulti($event)">Confirm</button>
+-#    / </li>
+-#    .clearfix
+
+
+/ Multi select with tree and Confirm btn
+
+.btn-group(  ng-mouseover="mouse = true" ng-mouseleave="mouse = false")
+
+  %button.btn.dropdown-toggle(style="color:#6d747b;"){:class => "{{btnCls}}", "ng-class" => "{disabled: !isEnabled()}", "ng-click" => "toggleDrop()"}
+    Город
+  %ul.dropdown-menu.block{"ng-show" => "opened"}
+    %li
+      / <a class="multiAll" ng-click="selectItem(options)">All
+      / <span class="icon-ok" ng-show="checked(options)"></span>
+      / </a>
+      %ul.menu(document-click='click($event)' ng-mouseover="mouse = true" ng-mouseleave="mouse = false")
+
+        %li{"ng-repeat" => "item in options.items"}
+
+          .city-plus(style="float:left" ng-click="item.show = !item.show")
+            .pluss(ng-hide="item.show")
+              +
+            .minus(ng-show="item.show") -
+
+          %a.multicheck(style="color:#cc00cc;"){"ng-click" => "selectItem(item)", "ng-show" => "!hasChildren(item)"}
+            {{item.name}}
+            %span.icon-ok{"ng-show" => "checked(item)"}
+          %a.multiAll{"ng-click" => "item.show = !item.show", "ng-show" => "hasChildren(item)"}
+            {{item.name}}
+            -#%span.icon-ok{"ng-show" => "checked(item)"}
+            %i.glyphicon.glyphicon-ok{"ng-show" => "checked(item)"}
+          %ul.menu{"ng-show" => "hasChildren(item)"}
+            %li(ng-show="item.show"){"ng-repeat" => "option in item.items"}
+
+              %a.multicheck(ng-class="{'select-active': checked(option)}"){"ng-click" => "selectItem(option)"}
+                {{option.name}}
+                %i.glyphicon.glyphicon-ok{ "ng-show" => "checked(option)"}
+
+
+
+    / <li class="centered">
+    / <button class="btn btn-mini btn-info saveMultiAll" ng-click="confirmMulti($event)">Confirm</button>
+    / </li>
+    .clearfix

@@ -1,0 +1,22 @@
+%form#new_user.new_user{"accept-charset" => "UTF-8", :action => "/users", :method => "post"}
+  %div{:style => "margin:0;padding:0;display:inline"}
+    %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+    %input{:name => "authenticity_token", :type => "hidden", :value => "dDm4hok9dprlTY6dtYxZ87MC0GbCFEY2kyYuhZfkMTc="}/
+  %div
+    %label{:for => "user_email"} Email
+    %br/
+    %input#user_email{:autofocus => "autofocus", :name => "user[email]", :size => "30", :type => "email", :value => ""}/
+  %div
+    %label{:for => "user_password"} Password
+    %br/
+    %input#user_password{:name => "user[password]", :size => "30", :type => "password"}/
+  %div
+    %label{:for => "user_password_confirmation"} Password confirmation
+    %br/
+    %input#user_password_confirmation{:name => "user[password_confirmation]", :size => "30", :type => "password"}/
+  %div
+    %input{:name => "commit", :type => "submit", :value => "Sign up"}/
+
+%a.reg(href="/sign_in" ) Вход
+
+

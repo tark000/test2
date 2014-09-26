@@ -1,0 +1,28 @@
+@import "rails_admin/base/variables.scss";
+@import "rails_admin/base/mixins.scss";
+@import "angular-slider.min";
+@import "chosen/chosen";
+@import "chosen/chosen-spinner";
+@import "select2";
+@import "new_carusel";
+@import "bootstrap";
+@import "style";
+@import "create_style";
+@import "map_style";
+@import "bootstrap-glyphicons";
+@import "media";
+
+
+gm-style img { max-width: none; }
+.gm-style label { width: auto; display: inline; }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+
+
+
+
+//max-height: 300px;
+//overflow: auto;

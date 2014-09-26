@@ -1,0 +1,68 @@
+.row(ng-init="params = {hScrollbar : true, snap: 'li' }" style="overflow:hidden;"   )
+  .large-12.columns
+    %a(ui-sref="edit({living:advert.living})" ng-if="advert.abilities.update==true")
+      Edit
+    %a{:href => "/uploads/pdf/{{advert.id}}.pdf", "target"=>"_blank" }
+      PDF
+  .large-12.columns.show_image
+    %img.th.radius(ng-src="{{advert.photo.photo.big.url}}" ng-cloak )
+
+    .row
+      .large-12.columns
+        %p
+          %ul.large-block-grid-4.small-block-grid-2(id="mycontainer" style="overflow:hidden;"  scrollable parameters="{{ {hScroll: 'true',  hScrollbar: 'true', snap: 'li'} }}" curr-page-x="currPageX" curr-page-y="currPageY" curr-x="currX"
+                                                    curr-y="currY" is-min-y="isMinY" is-max-y="isMaxY")
+
+            %li.listitem(ng-repeat="image in advert.advertImages" ng-cloak ng-animate="{enter:'animated flipOutY', leave:'animated bounceInDown'}" )
+
+              %figure.roundImage
+                %img(ng-src="{{image.medium.url}}" ng-click="setCurrentImage(image)" ng-cloak)
+
+  .row
+    .large-12.columns
+
+
+
+      .section-container.auto{"data-section" => ""}
+        %section.active
+          %p.title{"data-section-title" => ""}
+            %a{:href => "/advert/{{advert.id}}#desc" } Описание
+          .content{"data-section-content" => ""}
+            .row
+              .large-12.columns(ui-view="desc")
+
+
+
+        %section
+          %p.title{"data-section-title" => "" }
+            %a{:href => "/advert/{{advert.id}}#plan"} Планировка12
+          .content{"data-section-content" => ""}
+            .row
+              .large-12.columns(ui-view="plan")
+
+
+
+        %section
+          %p.title{"data-section-title" => ""}
+            %a{:href => "/advert/{{advert.id}}#video"} Видео
+          .content{"data-section-content" => ""}
+            .row
+              .large-12.columns(ui-view="video")
+
+        %section
+          %p.title{"data-section-title" => ""}
+            %a(ui-sref="show.map") Карта
+          .content{"data-section-content" => ""}
+            .row
+              .large-12.columns(ui-view="map")
+
+
+        %section
+          %p.title{"data-section-title" => ""}
+            %a{:href => "/advert/{{advert.id}}#contact" } Написать владельцу
+          .content{"data-section-content" => ""}
+            .row
+              .large-12.columns(ui-view="contact")
+
+
+

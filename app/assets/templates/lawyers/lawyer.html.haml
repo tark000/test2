@@ -1,0 +1,46 @@
+
+
+
+
+.search-rez.lawyer
+
+
+
+  %li(class="result" ng-repeat="lawyer in lawyers" class="my-repeat-animation" ng-style="lineStyle" ng-class="lineClass(advert.sale)" ng-cloak  )
+    .col-md-12.col-sm-12.col-xs-12.lawyers
+
+      -#sale={{advert.sale}}
+      .col-md-4.col-sm-4.col-xs-12
+
+        %img.th.index_img(ng-src="{{lawyer.image.image.small.url}}" ng-cloak )
+
+      .col-md-8.col-sm-8.col-xs-12
+
+        .lawyer-name
+
+          {{lawyer.name}}
+
+
+        .index-phone
+          %span(ng-bind="lawyer.phone")
+        %a(href="mailto:{{lawyer.email}}")
+          .index-email
+            %span(ng-bind="lawyer.email")
+        %p.lawyer-decr
+          {{lawyer.text}}
+
+
+.row
+
+  .col-md-6.col-sm-6.col-xs-12
+    %h3
+      Темы для обсуждения:
+    .blog-theme
+      .div(ng-repeat="blog in blogs" )
+        %a.delete-inline(ui-sref="blogs({id:blog.slug })")
+          .blog
+
+            {{blog.title}}
+
+  .lawyer-info.col-md-6.col-sm-6.col-xs-12
+

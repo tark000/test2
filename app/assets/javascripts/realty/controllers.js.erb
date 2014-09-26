@@ -1,0 +1,648 @@
+//TODO location.params to form's initial values
+//TODO remove unnecessary resources from loading
+//TODO reset search  form
+//TODO check if a $digest is already in progress
+
+
+
+angular.module('realty').controller('ApplicationController',['$scope','$rootScope','$timeout','Current','$http',
+    function($scope,$rootScope,$timeout,Current,$http){
+
+        $rootScope.current = Current;
+//        console.log("root user", $rootScope.current);
+
+
+        $rootScope.logout = function(){
+            console.log("logaut push");
+            $http.get('/service/current/logout').success(function(data){
+                window.location.reload();
+            })
+        }
+
+        $rootScope.goToAdmin = function(){
+//            $location.path('/admin');
+            window.location = "/admin"
+        }
+
+//        $rootScope.clickRoot = function(){
+//            console.log("click2");
+//            $rootScope.$broadcast('handleClickOutside',true);
+//        }
+
+}]);
+
+angular.module('realty').controller('RegistrationController',['$scope',
+    function($scope){
+
+    }]);
+
+angular.module('realty').controller('RequestController', ['$scope','$log','$state','$modalInstance',
+    '$q','$http','$stateParams','$modalInstance','$location','$timeout',
+    function ($scope,$log,$state,$modalInstance,$q,$http,$stateParams,$modalInstance,$location,$timeout) {
+
+        $scope.ok = function () {
+            $modalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+        $scope.showMessage = false;
+
+        $scope.email = {}
+
+        $scope.email.time = new Date();
+
+        $scope.sendEmail = function(email,time){
+            $scope.url = $location.absUrl();
+
+            if ($scope.email.time && $scope.email.name &&  $scope.email.phone && $scope.email.data){
+                $http({
+                    url: '/contact_us/send_email?phone=' + $scope.email.phone+ '&url=' +
+                            $scope.url + "&name=" +
+                            $scope.email.name + "&data=" + $.datepicker.formatDate('yymmdd', $scope.email.data) + "&time=" + $scope.email.time.toLocaleTimeString() +
+                            "&url" + $scope.url,
+                    method: "POST"
+                }).success(function(data){
+                            $scope.usr = {};
+                            console.log("success",data)
+                            $scope.email = {}
+                            $scope.showMessage = true;
+                            $timeout(function() {
+                                $scope.showMessage = false;
+                            }, 3000);
+                        });
+            } else {
+                $scope.showError = true;
+                $timeout(function() {
+                    $scope.showError = false;
+                }, 3000);
+
+            }
+
+//            $log.debug('$scope.product',$scope.product.id);
+//            $log.debug('$location.path()',$location.absUrl());
+
+
+
+        }
+
+
+//        localStorageService.clearAll();
+//        localStorageService.add('test','Ultimate Frisbee');
+}]);
+
+angular.module('realty').controller('InfoController',['$scope','$rootScope','$state','$location',
+    'Email','$cookieStore','$timeout',
+    function($scope,$rootScope,$state,$location,Email,$cookieStore,$timeout){
+        $scope.items = [
+            "The first choice!",
+            "And another choice for you.",
+            "but wait! A third!"
+        ];
+        $scope.$on('$locationChangeStart', function(event) {
+            console.log("change route")
+            if ($location.search().solr != null){
+                $scope.selected = $location.search().solr;
+            } else {
+                $scope.selected = "";
+            }
+        });
+
+        $scope.searchBut = function (search){
+            console.log("search",search);
+
+            $location.search({solr: search});
+
+        }
+
+//        $cookieStore.put('favorites', "tabName");
+        var array = [];
+//        console.log("favorites get",$store.get('favorites'))
+//        console.log("cookies get",$cookieStore.get('favorites'))
+        array = $cookieStore.get('favorites');
+//        console.log("array",array)
+        if (array == null){
+//            console.log("null")
+            $cookieStore.put('favorites', []);
+//            $store.bind($scope,'favorites',[]);
+        } else {
+//            console.log("present")
+            $cookieStore.put('favorites', array);
+            $scope.favoritesCount = array.length;
+
+//            $store.bind($scope,'favorites',array);
+        }
+
+
+
+        $scope.$on('handleRemoveFavorite', function(val1, advert) {
+            array = $cookieStore.get('favorites');
+            var index = array.indexOf(advert.id);
+            if (index > -1) {
+                array.splice(index, 1);
+            }
+            $cookieStore.put('favorites',array);
+            $scope.favoritesCount = array.length;
+
+        })
+        $scope.$on('handleAddFavorite', function(val1, advert) {
+            console.log("advert id",advert.id)
+            console.log("array123",array == []);
+            array = $cookieStore.get('favorites');
+            var present = false;
+            angular.forEach(array,function(value,key){
+                if (value == advert.id){
+                    present = true;
+                }
+            })
+            if (present == false){
+                array.push(advert.id)
+            }
+
+//            console.log("array",array)
+            $cookieStore.put('favorites',array);
+            $scope.favoritesCount = array.length;
+
+//            console.log("favorites ",$store.get('favorites'));
+        });
+
+        $scope.showFavorites = function(){
+            array = $cookieStore.get('favorites');
+//            console.log("array",array.split(",") == []);
+//            console.log("$cookieStore.get('favorites') array",array == $cookieStore.get('favorites'));
+//            console.log("typeof favorites')", typeof $cookieStore.get('favorites')[0]);
+//            console.log("typeof favorites' size)", $cookieStore.get('favorites').length);
+            if ($cookieStore.get('favorites').length == 0){
+                addAlert()
+                $timeout(function() {
+                        closeAlert1();
+                }, 3000);
+            } else {
+
+
+
+                $state.go('search').then(function(){
+                    $location.search({favorites:array.join()});
+                });
+//
+            }
+
+        }
+
+
+        $scope.error = false;
+        $scope.save = false;
+        $scope.sendEmail = function(email){
+//            console.log("mail data", angular.toJson($scope.email));
+//            console.log("mail data", angular.toJson(email));
+            if (email){
+                new Email({mail: email}).create().then(function(data){
+                    console.log("mail data", angular.toJson(data));
+                    $scope.email = '';
+                    $scope.save = true;
+                    $timeout(function() {
+                        $scope.save = false;
+                    }, 5000);
+                });
+            } else {
+                $scope.error = true;
+                $timeout(function() {
+                    $scope.error = false;
+                }, 5000);
+            }
+
+        }
+
+
+        //dropdown favorites
+        $scope.dropdown = [
+            {
+                "text": "<i class=\"fa fa-download\"></i>&nbsp;Another action",
+                "href": "/"
+            },
+            {
+                "text": "<i class=\"fa fa-globe\"></i>&nbsp;Display an alert",
+                "click": "$alert(\"Holy guacamole!\")"
+            },
+            {
+                "divider": true
+            },
+            {
+                "text": "Separated link",
+                "href": "#separatedLink"
+            }
+        ];
+
+
+
+        //
+        $scope.isActive = function (viewLocation) {
+
+            var s=false;
+            if($location.path().indexOf(viewLocation) != -1){
+                s = true;
+            }
+            return s;
+//            return viewLocation === $location.path();
+        };
+
+        //alert
+        $scope.alerts = [];
+        function addAlert(){
+            if ($scope.alerts.length > 0){
+
+            } else{
+                $scope.alerts.push({type: 'danger',msg: "Нет выбранных вариантов"});
+            }
+
+        }
+
+        function closeAlert1(index) {
+            $scope.alerts.splice(index, 1);
+        }
+        $scope.closeAlert = function(index) {
+            closeAlert1(index);
+
+        };
+
+        var velIn = 1;
+        $scope.addClassIn = function (){
+            console.log("add in")
+            if (velIn == 1) {
+                angular.element('.collapse').addClass('in');
+                velIn = 2;
+            } else {
+                angular.element('.collapse').removeClass('in');
+                velIn = 1;
+            }
+        }
+
+
+}]);
+
+angular.module('realty').controller('IndexController',['$rootScope','$scope', 'Advert','$q','$stateParams','$state','$location','$cookieStore','$log',
+    function($rootScope,$scope, Advert,$q,$stateParams,$state,$location,$cookieStore,$log){
+
+       // console.log("stateParams",angular.toJson($stateParams));
+
+
+        //TODO broadcast if stateParams present
+        $rootScope.$broadcast("UpdateSearchForm", {
+            category : $stateParams['category'],
+            map :$stateParams['map'],
+            operation:$stateParams['operation'],
+            living: $stateParams['living'],
+            city: $stateParams['city']
+
+        });
+
+        Advert.query($stateParams).then(function(data){
+
+            console.log('total',data.adverts);
+            $scope.adverts = data.adverts;
+
+
+
+            angular.forEach($scope.adverts,function(advert){
+                var array = $cookieStore.get('favorites');
+                var index = array.indexOf(advert.id);
+                if (index > -1) {
+                    advert.inBasket = true;
+                } else {
+                    advert.inBasket = false;
+                }
+
+            })
+            $scope.total = data.meta.total;
+
+            $scope.per_page = 12;
+            $scope.currentPage =  parseInt(1);
+            $scope.pages = Math.round($scope.total/$scope.per_page);
+            $scope.first = 1
+            $scope.page_style = 'current';
+//            console.log('tottal', $scope.total)
+//            console.log("pages",Math.round($scope.total/$scope.per_page))
+
+            if($stateParams['page']>0){
+                var currentPage = parseInt($stateParams['page']);
+
+            }
+            $scope.setNext = function(page){
+                $location.search('page',parseInt($scope.currentPage)+1);
+            }
+
+            $scope.setPrev = function(page){
+                console.log("click prev");
+                $location.search('page',parseInt($scope.currentPage)-1);
+            }
+
+
+            // pagination
+
+            $scope.total = data.meta.total;
+
+
+
+            console.log("total index",angular.toJson($scope.total))
+//                $rootScope.$broadcast('handleBroadcast',$scope.total);
+
+            $scope.per_page = 12;
+            $scope.currentPage =  parseInt(1);
+            $scope.pages = Math.ceil($scope.total/$scope.per_page);
+            $scope.colPages = [];
+            var x = 1 ;
+            for (x = 1; x <= $scope.pages; x++) {
+                $scope.colPages.push(x);
+            }
+            $scope.first = 1
+            $scope.firstPagin = true;
+            $scope.lastPagin = true;
+            $scope.paginShow = true;
+            $scope.prevPagin = true;
+            $scope.nextPagin = true;
+            $scope.page_style = 'current';
+//            console.log('tottal', $scope.total)
+//            console.log("pages",Math.round($scope.total/$scope.per_page))
+            if ($scope.pages < 2){
+                $scope.paginShow = false;
+            } else if($scope.pages == 2){
+                $scope.lastPagin = false;
+                $scope.firstPagin = false;
+            }
+
+
+            if ($scope.pages >= $stateParams['page']){
+                if($stateParams['page']>0){
+                    $scope.currentPage = parseInt($stateParams['page']);
+
+                }
+                $scope.setNext = function(page){
+
+                    $location.search('page',parseInt($scope.currentPage)+1);
+                }
+
+                $scope.setPrev = function(page){
+                    console.log("click prev");
+
+                    $location.search('page',parseInt($scope.currentPage)-1);
+                }
+
+                $scope.setPage = function(page){
+
+                    $location.search('page',parseInt(page));
+                }
+
+            }
+
+            if ($scope.currentPage == 1){
+                $scope.firstPagin = false;
+                $scope.prevPagin = false;
+
+            } else if ($scope.currentPage == $scope.pages ){
+                $scope.lastPagin = false;
+                $scope.nextPagin = false;
+            } else if ($scope.currentPage == $scope.pages - 1){
+                $scope.lastPagin = true;
+                $scope.nextPagin = false;
+            } else if ($scope.currentPage == 2) {
+                $scope.firstPagin = true;
+                $scope.prevPagin = false;
+            }
+
+            //pagination end
+
+
+        }).then(function(){
+                    $scope.pagination = {
+                        cur: 1,
+                        total: $scope.total,
+                        display: 12
+                    }
+                })
+
+
+        $scope.downloadAnimation = false;
+        if($stateParams['map']==='1'){
+
+
+            $scope.downloadAnimation = true;
+
+
+            $scope.markers = [];
+
+            $scope.options = {
+                map: {
+                    center: new google.maps.LatLng(50.4020355,30.5326905),
+                    zoom: 7,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                },
+                adverts: {
+                    icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png'
+                },
+                selected: {
+                    icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png'
+                }
+            };
+            $scope.dubl = [];
+            var i = 0;
+
+            //
+            Advert.query($stateParams).then(function(data){
+                $log.debug('data then', data);
+                //$scope.center = new google.maps.LatLng(data.adverts[0].latitude, data.adverts[0].longitude);
+                $scope.center = new google.maps.LatLng(50.4020355,30.5326905);
+                $scope.zoom = 10;
+
+                $scope.latlngbounds = new google.maps.LatLngBounds();
+                var photo = ''
+                photo = 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png';
+                angular.forEach(data.adverts,function(value, key){
+                    // $log.debug("adverts data value", value);
+
+/*
+                    if (value.categories_id.indexOf(20) < 0){
+                        photo = 'assets/sale.png';
+
+                    } else {
+                        photo = 'assets/living_true.png';
+//                        console.log("living true", value.id)
+                    }*/
+                    $scope.dubl[i] = value.id
+                    $log.debug("latitude first",value.latitude);
+
+                    if(angular.isDefined(value.latitude)&&(value.latitude!=null)){
+                        $log.debug("latitude",value.latitude);
+
+                        tests =  data.adverts.map(function(x){
+                            if((angular.equals(x.latitude,value.latitude)) && (angular.equals(x.longitude,value.longitude))){
+
+                                return x
+                            }
+                        })
+                        tests = tests.filter(function(n){return n})
+                        //dupl.push(tests)
+                        if(angular.isDefined(tests)){
+
+                            $scope.dubl[i] = {
+                                id:value.id,
+                                ids:tests
+                            }
+                        }
+
+                        var a = new google.maps.LatLng(value.latitude,value.longitude);
+                        $scope.latlngbounds.extend(a);
+
+                        $scope.markers.push({
+                            name:value.title,
+                            id:value.id,
+                            //img:value.photo.photo.medium.url,
+                            img:'',
+                            check: i,
+                            category:value.categoryId,
+                            location:{
+                                lat:value.latitude,
+                                lng:value.longitude
+
+                            },//,
+                            //,
+
+                            icon:{
+                                icon:photo
+                            }
+
+                        })
+                        i++;
+                    }
+                })
+
+                $scope.downloadAnimation = false;
+
+
+            })
+        }
+
+        $scope.getAdvertOpts = function(advert) {
+            return angular.extend(
+                    { title: advert.name },
+                    $scope.options.map,
+                    advert.icon
+
+            );
+        };
+
+
+        $scope.$on('gmMapIdle', function(event, mapId) {
+
+            console.log('gmMapIdle', mapId);
+            if (mapId === "'myMap'") {
+                $scope.boo = "aaaaa"
+            }
+        });
+
+        $scope.selectAdvert = function(advert, marker) {
+
+            $scope.class = true;
+            $scope.advert = advert;
+            if ($scope.prev) {
+                $scope.prev.setOptions(advert.icon);
+            }
+            $scope.prev = marker;
+            marker.setOptions($scope.options.selected);
+        };
+
+        $scope.whatClassIsIt= function(Value){
+            $log.debug('value', Value);
+            if(angular.isDefined(Value))
+                return "map_little"
+            else
+                return "map";
+        }
+
+
+
+        $scope.addFavorite = function(advert){
+            advert.inBasket = true;
+            $rootScope.$broadcast('handleAddFavorite',advert);
+
+        }
+
+        $scope.removeFavorite = function(advert){
+            advert.inBasket = false;
+            $rootScope.$broadcast('handleRemoveFavorite',advert);
+
+        }
+
+
+        //price area filter
+        $scope.filterNew = function(){
+            $location.search('new',1);
+        }
+
+        $scope.filterAll = function(){
+            $location.search({});
+        }
+        $scope.isActive1 = function (vel) {
+
+            var s=false;
+
+            if (vel == $stateParams['sort']){
+                s = true
+            }
+
+            return s;
+//            return viewLocation === $location.path();
+        };
+
+
+
+        $scope.filterOrder = function(vel){
+
+            $location.search('sort',vel);
+        }
+
+        if ($location.search().sort == "price_up"){
+            $scope.priceUp = true;
+            $scope.priceDown = false;
+            $scope.areaUp = false;
+            $scope.areaDown = false;
+            $scope.price = true;
+
+        }else if ($location.search().sort == "price_down"){
+            $scope.priceUp = false;
+            $scope.priceDown = true;
+            $scope.areaUp = false;
+            $scope.areaDown = false;
+            $scope.price = true;
+        }
+
+        else if ($location.search().sort == "area_up"){
+            $scope.priceUp = false;
+            $scope.priceDown = false;
+            $scope.areaUp = true;
+            $scope.areaDown = false;
+            $scope.area = true;
+        }else if ($location.search().sort == "area_down"){
+            $scope.priceUp = false;
+            $scope.priceDown = false;
+            $scope.areaUp = false;
+            $scope.areaDown = true;
+            $scope.area = true;
+        }
+
+        // search new advert
+        $scope.filterNew = function(){
+            $location.path('/adverts')
+            $location.search('new',1);
+            $location.search('page',1);
+        }
+        $scope.by_all = true
+        if ($location.search().by_all != null){
+
+            $scope.by_all = $location.search().by_all
+        }
+
+    }])
+
+
+

@@ -1,0 +1,9 @@
+%span
+
+%ul(id="mycontainer" style="overflow:hidden;"  scrollable parameters="{{ {hScroll: 'true',  hScrollbar: 'true', snap: 'li'} }}" curr-page-x="currPageX" curr-page-y="currPageY" curr-x="currX"
+                                                    curr-y="currY" is-min-y="isMinY" is-max-y="isMaxY")
+
+  %li.listitem(ng-repeat="image in advert.layouts" )
+    %img.th.radius(ng-src="{{image.small.url}}"
+    ng-click="setCurrentImage(image)" )
+

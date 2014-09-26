@@ -1,0 +1,137 @@
+.notariat
+
+  -#%h3
+  -#  {{management.title}}
+
+  %img(ng-src="{{management.image.image.big.url}}")
+  %span(ng-bind-html="text")
+
+
+.back-form
+  %h4
+    Предварительная подача заявки на управление
+  / Загрузка через проводник
+
+  %form{:name => "signUpForm", "ng-submit" => "send()", :novalidate => ""}
+
+
+
+    %br
+    Адрес *
+    %br
+    %input(name="address" ng-model="address" class="form-control" ng-class="{ errorinput: submitted && signUpForm.address.$invalid }"  required){:type => "text"}
+    %br
+    Тип недвижимости *
+
+    %br
+    %select( ui-select2="select2opts1"   ng-model='signUpForm.category' data-placeholder='Категория' ng-class="{ errorinput: submitted && signUpForm.category_id.$invalid }" ng-minlength="1" ng-required="true")
+      %option
+      %option(ng-repeat='category in categories' value='{{category.name}}')
+        {{category.name}}
+    -#%select( ui-select2="select2opts1"   ng-model='category'  data-placeholder='Категория'  )
+    -#  %option
+    -#  %option(ng-repeat='category in categories' value='{{category.id}}')
+    -#    {{category.name}}
+    %br
+    Этаж/этажность
+    %br
+    %input(ng-model="flor"  class="form-control" value="" ){:type => "text"}
+    %br
+    Наличие отдельных входов
+    %br
+    %input(ng-model="enter" class="form-control"  ){:type => "text"}
+
+    %br
+    Целевое назначение недвижимости
+    %br
+    %input(ng-model="goal" class="form-control"){:type => "text"}
+    %br
+    Метраж *
+    %br
+    %input(name="area" ng-model="area" class="form-control" numbers-only="numbers-only" ng-class="{ errorinput: submitted && signUpForm.area.$invalid }" required){:type => "text"}
+    %br
+    Телефон *
+    %br
+    %input(name="phone" ng-model="phone" class="form-control" ng-class="{ errorinput: submitted && signUpForm.phone.$invalid }"  required){:type => "text"}
+    %br
+    Мейл *
+    %br
+    %input( type="email" name="email"  ng-model="email" class="form-control" ng-class="{ errorinput: submitted && signUpForm.email.$invalid }"  required){:type => "text"}
+    %br
+    Видео
+    %span.video-description
+      (вставте ссылку на видео)
+    %br
+    %input(ng-model="video" class="form-control"){:type => "text"}
+
+    %br
+    Фото
+    %span.video-description
+      (можно загрузить несколько фотографий общим объемом до 15 МБ)
+    -#%input{"ng-model" => "myModelObj", :type => "text"}
+    -#%input{"ng-file-select" => "onFileSelect($files)", :type => "file"}
+    -#%input{:multiple => "", "ng-file-select" => "onFileSelect($files)", :type => "file"}
+    -#%div{"ng-file-drag-over-class" => "optional-css-class", "ng-file-drop" => "onFileSelect($files)", "ng-show" => "dropSupported"} drop files here
+    -#%div{"ng-file-drop-available" => "dropSupported=true", "ng-show" => "!dropSupported"} HTML5 Drop File is not supported!
+    -#%button{"ng-click" => "upload.abort()"} Cancel Upload
+
+    %input{:multiple => "", "ng-file-select" => "onFileSelect($files)", :onclick => "this.value=null", :type => "file"}
+
+    %br
+    %p(ng-show="selectedFiles.length > 0")
+      Загружено {{totalSizeMb}} МБ, максимально доступно 15 МБ.
+    .new-advert-message.error(ng-show="maxSizeError")
+      Обьем загружаемых файлов ограничен.
+
+
+    %div{"ng-show" => "selectedFiles != null"}
+      .sel-file{"ng-repeat" => "f in selectedFiles"}
+
+        %img(style="width:100px; margin-bottom:10px;"){"ng-show" => "dataUrls[$index]", "ng-src" => "{{dataUrls[$index]}}"}
+
+
+        %button.button{"ng-click" => "abort($index)"} Удалить
+        {{f.name}} - size: {{f.size}}B - type: {{f.type}}
+
+        %br
+
+
+    %p
+    {{val1}} + {{val2}} =
+    %p
+    %input.form-control(placeholder="Введите результат операции"  ){"ng-model" => "captcha", "smart-float" => "", :type => "text"}
+
+
+
+    %button.add-to-favorites{:type => "submit"}
+      Отправить запрос
+
+    .download_animation(ng-show="downloadAnimation")
+      #floatingCirclesG
+        #frotateG_01.f_circleG
+        #frotateG_02.f_circleG
+        #frotateG_03.f_circleG
+        #frotateG_04.f_circleG
+        #frotateG_05.f_circleG
+        #frotateG_06.f_circleG
+        #frotateG_07.f_circleG
+        #frotateG_08.f_circleG
+.new-advert-message(ng-show="sendMessage")
+  Ваше сообщение отправленно.
+.new-advert-message(ng-show="downloadAnimation")
+  Идет отправка сообщения.
+.new-advert-message.error(ng-show="errorMessage1")
+  Заполните все обезательные поля.
+.new-advert-message.error(ng-show="errorMessage2")
+  Не верная сумма.
+
+
+
+%br
+%br(ng-hide="errorMessage")
+%br(ng-hide="sendMessage")
+%br
+%br
+%br
+%p
+  * - поля обязательные для заполнения.

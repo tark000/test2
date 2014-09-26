@@ -1,0 +1,306 @@
+.content
+  .dropdown(ng-if="current.user.admin")
+    %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+      Рассылка
+      %span.caret
+    %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1", :role => "menu"}
+      %li{:role => "presentation"}
+        %a(ng-click="sendNewsletter()")
+          Сделать рассылку
+  %br
+  %br
+
+  %a(ng-click="edit()" ng-if="current.user.admin")
+    Редактировать
+
+
+
+  .index-content1
+    -#{{url}}
+    -#{{url + slides[0].imageSmall}}
+
+    %a(ng-href="{{advert.pdf}}" ){:href=>'{{advert.pdf}}', "target"=>"_blank" }
+      %button.btn-default-add.pdf-right
+        Скачать PDF
+    .show-socsety
+      %ul.social-list(ng-social-buttons data-url="urlAbsol" data-title="advert.title" data-description="advert.description" data-image="product.thumbtImage")
+        %li.ng-social-vk
+          .vkontakte
+        %li.ng-social-facebook
+          .facebook
+        -#%li.ng-social-google-plus
+          .google
+        %li.ng-social-twitter
+          .twitter
+
+
+      -#%ul.social-list(ng-social-buttons
+      -#         data-url="urlAbsol"
+      -#         data-image="'https://79.135.193.57:3000/uploads/advert/photo/560/small_slider_BIG_Zira_Island_Copyright_BIG_3_S.jpg' "
+      -#         data-title="advert.title"
+      -#         data-description ="advert.description"
+      -#         )
+      -#
+      -#  %li.ng-social-vk
+      -#    .vkontakte
+      -#  %li.ng-social-facebook
+      -#    .facebook
+      -#  %li.ng-social-google-plus
+      -#    .google
+      -#  %li.ng-social-twitter
+      -#    .twitter
+        -#%li.ng-social-linkedin
+        -#  .linkedin
+        -#%li.ng-social-rss
+        -#  .rss
+    .tab
+
+
+      %tabset
+        %tab{:heading => "Фото"}
+          .row
+            .col-sm-10
+              .container1.slider
+
+                %img.slide{"ng-repeat" => "slide in slides", "ng-show" => "isActive($index)", "ng-src" => "{{slide.imageSlider}}", "ng-swipe-left" => "showNext()", "ng-swipe-right" => "showPrev()"}
+
+                %a.arrow.prev{ "ng-click" => "showPrev()"}
+                %a.arrow.next{ "ng-click" => "showNext()"}
+                -#%a.arrow.prev.hidden-xs{ "ng-click" => "showPrev()"}
+                -#%a.arrow.next.hidden-xs{ "ng-click" => "showNext()"}
+
+
+
+            .col-sm-2.hidden-xs
+
+              -# if sliders >= 5
+              %ul.list-image-ul(ng-show="{{slides.length >= 5}}")
+                %li.list-image.up{ "ng-click" => "showPrev()"}
+                  .triangle-up
+                %li.list-image
+                  %a.thumbnail
+                    %img{"ng-src" => "{{slides[image5].imageSmall}}", :style => "width:100px;", "ng-click" => "showNextTwo()"}
+                    {{slider.imageSlider}}
+                %li.list-image
+                  %a.thumbnail
+
+                    %img{"ng-src" => "{{slides[image4].imageSmall}}", :style => "width:100px;",  "ng-click" => "showNext()"}
+                    {{slider.imageSlider}}
+                %li.list-image
+                  %a.thumbnail
+                    %img{"ng-src" => "{{slides[image3].imageSmall}}", :style => "width:100px;", "ng-click" => "imageSlider(currentImage)"}
+                    {{slider.imageSlider}}
+                %li.list-image
+                  %a.thumbnail
+                    %img{"ng-src" => "{{slides[image2].imageSmall}}", :style => "width:100px;", "ng-click" => "showPrev()"}
+                    {{slider.imageSlider}}
+                %li.list-image
+                  %a.thumbnail
+                    %img{"ng-src" => "{{slides[image1].imageSmall}}", :style => "width:100px;", "ng-click" => "showPrevTwo()"}
+                    {{slider.imageSlider}}
+
+                %li.list-image.down{ "ng-click" => "showNext()"}
+
+                  .triangle-down
+
+              %ul.list-image-ul(ng-show="{{slides.length < 5}}")
+                %li.list-image.up{ "ng-click" => "showPrev()"}
+                  .triangle-up
+                %li.list-image(ng-show="{{slides.length > 0}}")
+                  %a.thumbnail
+                    %img{"ng-src" => "{{slides[0].imageSmall}}", :style => "width:100px;", "ng-click" => "showImageId(0)"}
+                    {{slider.imageSlider}}
+                %li.list-image(ng-show="{{slides.length > 1}}")
+
+                  %a.thumbnail
+
+                    %img{"ng-src" => "{{slides[1].imageSmall}}", :style => "width:100px;",  "ng-click" => "showImageId(1)"}
+                    {{slider.imageSlider}}
+                %li.list-image(ng-show="{{slides.length > 2}}")
+                  %a.thumbnail
+                    %img{"ng-src" => "{{slides[2].imageSmall}}", :style => "width:100px;", "ng-click" => "showImageId(2)"}
+                    {{slider.imageSlider}}
+                %li.list-image(ng-show="{{slides.length > 3}}")
+                  %a.thumbnail
+                    %img{"ng-src" => "{{slides[3].imageSmall}}", :style => "width:100px;", "ng-click" => "showImageId(3)"}
+                    {{slider.imageSlider}}
+
+
+                %li.list-image.down{ "ng-click" => "showNext()"}
+
+                  .triangle-down
+
+
+
+
+        -#%tab(ng-click="selected = 'second'" ){:heading => "На карте"}
+        %tab(ng-click="selected('second')" ng-show="advert.latitude>0"){:heading => "На карте"}
+          #map_canvas
+            .include-example{"ng-include" => "'/assets/products/show.map.html'"}
+
+
+        %tab(  ng-show="videoTab || advert.movies.length  > 0"){:heading => "Видео"}
+
+
+          .large-12.columns(ng:repeat="video in advert.movies | filter:query"  ng-bind-html="video.video | to_trusted")
+
+
+          %div(ng-bind-html="videoTab")
+
+
+
+        %tab(  ng-show="layouts.length > 0"){:heading => "Планировка"}
+
+
+
+          .row
+            .col-sm-10
+              .container1.slider
+
+                %img.slide{"ng-repeat" => "slide in layouts", "ng-show" => "isActiveL($index)", "ng-src" => "{{slide.imageSlider}}", "ng-swipe-left" => "showNextL()", "ng-swipe-right" => "showPrevL()"}
+
+                %a.arrow.prev{ "ng-click" => "showPrevL()"}
+                %a.arrow.next{ "ng-click" => "showNextL()"}
+                -#%a.arrow.prev.hidden-xs{ "ng-click" => "showPrev()"}
+                -#%a.arrow.next.hidden-xs{ "ng-click" => "showNext()"}
+
+
+
+            .col-sm-2.hidden-xs
+
+              -# if sliders >= 5
+              %ul.list-image-ul(ng-show="{{layouts.length >= 5}}")
+                %li.list-image.up{ "ng-click" => "showPrevL()"}
+                  .triangle-up
+                %li.list-image
+                  %a.thumbnail
+                    %img{"ng-src" => "{{layouts[image5L].imageSmall}}", :style => "width:100px;", "ng-click" => "showNextTwoL()"}
+                    {{slider.imageSlider}}
+                %li.list-image
+                  %a.thumbnail
+                    %img{"ng-src" => "{{layouts[image4L].imageSmall}}", :style => "width:100px;",  "ng-click" => "showNextL()"}
+                    {{slider.imageSlider}}
+                %li.list-image
+                  %a.thumbnail
+                    %img{"ng-src" => "{{layouts[image3L].imageSmall}}", :style => "width:100px;", "ng-click" => "imageSliderL(currentImage)"}
+                    {{slider.imageSlider}}
+                %li.list-image
+                  %a.thumbnail
+                    %img{"ng-src" => "{{layouts[image2L].imageSmall}}", :style => "width:100px;", "ng-click" => "showPrevL()"}
+                    {{slider.imageSlider}}
+                %li.list-image
+                  %a.thumbnail
+                    %img{"ng-src" => "{{layouts[image1L].imageSmall}}", :style => "width:100px;", "ng-click" => "showPrevTwoL()"}
+                    {{slider.imageSlider}}
+                %li.list-image.down{ "ng-click" => "showNext()"}
+                  .triangle-down
+              %ul.list-image-ul(ng-show="{{layouts.length < 5}}")
+                %li.list-image.up{ "ng-click" => "showPrevL()"}
+                  .triangle-up
+                %li.list-image(ng-show="{{layouts.length > 0}}")
+                  %a.thumbnail
+                    %img{"ng-src" => "{{layouts[0].imageSmall}}", :style => "width:100px;", "ng-click" => "showImageIdL(0)"}
+                    {{slider.imageSlider}}
+                %li.list-image(ng-show="{{layouts.length > 1}}")
+                  %a.thumbnail
+                    %img{"ng-src" => "{{layouts[1].imageSmall}}", :style => "width:100px;",  "ng-click" => "showImageIdL(1)"}
+                    {{slider.imageSlider}}
+                %li.list-image(ng-show="{{layouts.length > 2}}")
+                  %a.thumbnail
+                    %img{"ng-src" => "{{layouts[2].imageSmall}}", :style => "width:100px;", "ng-click" => "showImageIdL(2)"}
+                    {{slider.imageSlider}}
+                %li.list-image(ng-show="{{layouts.length > 3}}")
+                  %a.thumbnail
+                    %img{"ng-src" => "{{layouts[3].imageSmall}}", :style => "width:100px;", "ng-click" => "showImageIdL(3)"}
+                    {{slider.imageSlider}}
+
+
+                %li.list-image.down{ "ng-click" => "showNextL()"}
+
+                  .triangle-down
+
+
+    .description
+      .desc-title
+        {{advert.title}}
+
+        .show-opearation
+          {{advert.operation}}
+
+
+
+
+      .desc-info
+        .row
+          .col-lg-3
+            .index-city
+              %span1 Район:
+              %span(ng-bind="advert.district.name" )
+
+            .index-category
+              %span1
+              %span(ng-bind="advert.category" )
+
+            .index-area
+              %span1 Площадь:
+              %span(ng-bind="advert.area" )
+              м
+              %sup 2
+          .col-lg-3
+            .index-articul
+              %span1 ID обьекта:
+              %span(ng-bind="advert.id" )
+            .index-publicate
+              %span1 Опубликовано:
+              %span(ng-bind="advert.created_at" )
+            .index-eye
+              %span1 Просмотров:
+              %span(ng-bind="advert.viewcount" )
+
+          .col-lg-3
+            .index-metro
+              %span1 Ближайшее метро:
+              %span(ng-bind="advert.metro" )
+
+            .index-comissia
+              %span1 Комиссия:
+              %span(ng-bind="advert.commission" )
+
+            .index-status
+              %span1 Статус:
+              %span(ng-bind="advert.status" )
+
+          .col-lg-3
+            .index-parking(ng-repeat="item in advert.advert_options")
+              {{item}}
+              -#%span(ng-bind="item" )
+
+
+            .show-price
+              %span1 Цена:
+              общая
+            %br
+            .orange-price
+              {{advert.all_price | currency:''}} грн
+
+
+      .desc-description
+
+        -#%span(ng-bind-html-unsafe='advert.description')
+        -#%span(ng-bind-html='advert.description')
+        %span(ng-bind-html="desc")
+        {{advert.description}}
+
+      .show-button
+        .zayvka(ng-click = "openModal()")
+          Заявка на просмотр
+        .add-to-favorites(ng-click = "addFavorite()" ng-hide = "advert.inBasket")
+          Добавить в выбранное +
+        .add-to-favorites(ng-click = "removeFavorite()" ng-show="advert.inBasket")
+          Удалить из выбранного -
+        .contacts
+          .show-phone
+            Тел: +38 067 234 48 36
+          %a(href="mailto:vdorogun@gmail.com")
+            .show-mail
+              E-mail: vdorogun@gmail.com

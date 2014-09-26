@@ -1,0 +1,52 @@
+%h3
+  {{blog.title}}
+%p
+{{blog.description}}
+
+.comments(ng-repeat="comment in comments")
+
+  .comment
+    .user
+      {{comment.user}}
+    .created
+      {{comment.created_at |date:'yyyy-MM-dd '}}
+    %p {{comment.text}}
+    %p.del(ng-if="comment.abilities.destroy")
+
+      %a.del-comments( ng-click="deleteComment(comment,$index)" )
+.modal-time(ng-hide="current.auth")
+
+  Чтобы оставить коментарий зарегестрируйтесь.
+.all-comments(ng-show="current.auth")
+  #comments-form.comments
+    -#%img(ng-if="user.data.auth" ng-src = "{{user.data.miniImage}}"){:alt => "{{user.data.name}}", :height => "30", :width => "30"}/
+  #new_comment.new_comment
+
+    %form{:name => "newComment", "ng-submit" => "create()", :novalidate => ""}
+
+      %textarea.form-control#textarea(ng-model="newCommentBody" ){:cols => "40", :placeholder => "Прокомментировать", :rows => "3", :maxlength=> 500}
+      .comment-length
+        -#{{140 - newCommentBody.length}} chars remaining
+      %p(ng-if="!current.user.first_comment")
+        Для возможности обратной связи оставте свои контактные данные
+      %p
+
+      -#%input(name="name" ng-model="name" class="form-control" ng-class="{ errorinput: submitted && newComment.name.$invalid }"  required){:type => "text"}
+      .div(ng-if="!current.user.first_comment")
+        %input(name="name" ng-model="$parent.name" class="form-control"  ng-class="{ errorinput: submitted && newComment.name.$invalid }" placeholder="Имя"  ng-show="!current.user.first_comment" value="" required){:type => "text"}
+        %p
+
+        %input(name="phone" ng-model="$parent.phone" class="form-control"  ng-class="{ errorinput: submitted && newComment.phone.$invalid }" placeholder="Ваш телефон"  ng-show="!current.user.first_comment" value="" required){:type => "number"}
+      %p
+      {{val1}} + {{val2}} =
+      %p
+      %input.form-control(placeholder="Введите результат операции"){"ng-model" => "captcha", "smart-float" => "", :type => "text"}
+      %input.button.confirm-comments(  ng-disabled="buttonDisable"){ :type => "submit", :value => "Добавить коментарий" }
+      -#%input.button.confirm-comments(ui-sref="registration" ng-if="!user.data.auth"){:name => "commit", :type => "submit", :value => "Отправить" }
+    .new-advert-message.error(ng-show="errorMessage")
+      Не верная сумма.
+    .modal-time(ng-show="showMessage")
+
+      Сообщение будет опубликовано после проверки модератором.
+
+

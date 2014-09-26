@@ -1,0 +1,54 @@
+%div
+  .large-12.columns
+    advert=={{advert}}
+    %br
+    form  == {{AdvertForm}}
+  %form(ng-submit="submit()" novalidate ){:name=>'AdvertForm',:enctype=>'multipart/form-data'}
+    %p
+      Админ
+      %input(ng-model="AdvertForm.admin" ng-true-value="true" ng-false-value="false"){:type=>'checkbox'}
+    %p
+      Жилая
+      %input(ng-model="AdvertForm.living" ng-true-value="true" ng-false-value="false"){:type=>'checkbox'}
+    %p
+      %select(ui-select2 ng-model="AdvertForm.category" data-placeholder="Выберите категорию")
+        %option{:value => ''}
+        %option(ng-repeat="category in categories" value="{{category.id}}")
+          {{category.name}}
+    %p
+      %select(ng-model="AdvertForm.operation"  data-placeholder="Тип операции"){"ui-select2"=>"" }
+        %option{:value => ''}
+        %option(ng-repeat="operation in operations" value="{{operation.id}}")
+          {{operation.name}}
+    %p
+      %select(ng-model="AdvertForm.city" data-placeholder="Город"){"ui-select2"=>"" }
+        %option{:value => ''}
+        %option(ng-repeat="city in cities" value="{{city.id}}")
+          {{city.name}}
+    %p
+      %select(ng-model="AdvertForm.street" data-placeholder="Улица"){"ui-select2"=>"" }
+        %option{:value => ''}
+        %option(ng-repeat="street in streets" value="{{street.id}}")
+          {{street.name}}
+
+    Title
+    %input(ng-model="AdvertForm.title"){:type=>'text',:placeholder=>'Some Text 2'}
+
+      upload
+
+      %input(ng-model="AdvertForm.file" file-upload){:type=>'file'}
+      %img(ng-src="{{currentImage}}")
+      .row
+        .large-12.columns
+
+
+          %input(ng-model="add_image.file" additional-file-upload multiple ng-disabled="predicate = check; check=!currentImage.length>0"){:type=>'file'}
+
+          %ul
+            %li
+            %li(ng-repeat="image in images" )
+
+              %img(ng-src="{{image.url}}")
+      .large-12.columns
+        %input.upload-submit(ng-disabled="predicate = check; check=!currentImage.length>0"){:type=>'submit'}
+

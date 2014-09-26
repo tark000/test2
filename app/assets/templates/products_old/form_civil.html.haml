@@ -1,0 +1,337 @@
+:css
+  .div .columns {
+    border-width:1px;
+    border-style:solid;
+    border-color:#ff9900;
+   }
+
+%form.create-form(ng-submit='submit()' ng-init="AdvertForm.living=0"  novalidate ){:name=>'AdvertForm',:enctype=>'multipart/form-data'}
+  -#form = {{AdvertForm}}
+  -#{{advert}}
+  %fieldset
+    %legend.subheader
+      Новое обьявление Жилая недвижимость
+    .row
+      .col-md-12
+        %p
+          Админ
+          %input(ng-model='AdvertForm.admin'){:type=>'checkbox'}
+          Горячее
+          %input(ng-model='AdvertForm.hotadv' ){:type=>'checkbox'}
+          Свободно
+          %input(ng-model='AdvertForm.status' ){:type=>'checkbox'}
+
+
+      .col-md-6
+
+        .row
+          .col-md-6
+            %span Категория
+            %select( ui-select2="select2opts1"   ng-model='AdvertForm.category_id' data-placeholder='Категория' )
+              %option
+              %option(ng-repeat='category in categories' value='{{category.id}}')
+                {{category.name}}
+          .col-md-6
+            %span Операция
+            %select(ui-select2 ='select2opts1' ng-model='AdvertForm.operation_type_id'  data-placeholder="Операция" )
+              %option{:value=>''}
+              %option(ng-repeat='operation in operations' value='{{operation.id}}')
+                {{operation.name}}
+        .row
+          .col-md-6
+            %span Регион
+            %select(ui-select2 ='select2opts1' ng-model='AdvertForm.region_id' placeholder="Регион")
+              %option{:value => ''}
+              %option(ng-repeat='region in regions' value='{{region.id}}')
+                {{region.name}}
+          .col-md-6
+            %span Город
+            %select(ng-model='AdvertForm.city_id' ng-disabled='predicate = check; check=!AdvertForm.region_id.length>0' data-placeholder='Город' ui-select2 ='select2opts1')
+              %option{:value => ''}
+              %option(ng-repeat='city in cities' value='{{city.id}}')
+                {{city.name}}
+        .row
+          .col-md-6
+            %span Район
+            %select(ng-model='AdvertForm.district_id' data-placeholder='Район' ui-select2 ='select2opts1')
+              %option{:value => ''}
+              %option(ng-repeat='district in districts' value='{{district.id}}')
+                {{district.name}}
+          .col-md-6
+            %span Метро
+            %select(ng-model='AdvertForm.metro_station_id' data-placeholder='Метро' ui-select2 ='select2opts1')
+              %option{:value => ''}
+              %option(ng-repeat='metro in metro_stations' value='{{metro.id}}')
+                {{metro.name}}
+
+        .row
+          .col-md-6
+            %span Улица
+           
+            %select(ng-model='AdvertForm.street_id' data-placeholder='Улица' ui-select2 ='select2opts3')
+              %option{:value => ""}
+              %option{"ng-repeat" => "street in streets", :value => "{{street.id}}"}
+                {{street.name}}
+            -#%input(ng-model='AdvertForm.street' ng-disabled='predicate = check; check=!AdvertForm.city_id.length>0' ng-required="true"   ui-select2 ='select2opts2' placeholder="Улица" ){:type => 'hidden'}
+          .col-md-6
+            %span Номер дома
+            %input(ng-model='AdvertForm.house'ng-maxlength="5" class="form-control" ng-disabled='predicate = check; check=!AdvertForm.street_id'  ng-minlength="1" ng-required="true"  placeholder="Номер дома" ){:type => 'text'}
+
+
+
+      .col-md-6.title-block
+        %p
+          -#%input.minmax(ng-model='AdvertForm.title'  ng-minlength='1'){:type => 'text',:placeholder=>'Заголовок'}
+          %span Заголовок
+          %input.minmax(ng-model='AdvertForm.title' class="form-control" ){:type => 'text',:placeholder=>'Заголовок'}
+        %p
+          %span Описание
+          %textarea(ng-model='AdvertForm.description' class="form-control"){ :type => 'textarea', :placeholder=>'Описание'}
+
+      .col-md-12
+        %hr
+          %h4 Характеристики обьекта
+      .col-md-6
+        .row
+          .col-md-6
+            %span Тип здания
+
+            %select(ng-model='AdvertForm.house_type_id' ui-select2 ='select2opts1' data-placeholder='Тип здания')
+              %option{:value => ''}
+              %option(ng-repeat='house_type in house_types' value='{{house_type.id}}')
+                {{house_type.name}}
+          .col-md-6
+            %span Материал стен
+            %select(ng-model='AdvertForm.house_material_id' data-placeholder='Материал стен' ui-select2 ='select2opts1')
+              %option{:value => ''}
+              %option(ng-repeat='house_material in house_materials' value='{{house_material.id}}')
+                {{house_material.name}}
+          .col-md-6
+            %span Тип квартиры
+            %select(ng-model='AdvertForm.flat_type_id' data-placeholder='Тип квартиры' ui-select2 ='select2opts1')
+              %option{:value => ''}
+              %option(ng-repeat='flat_type in flat_types' value='{{flat_type.id}}')
+                {{flat_type.name}}
+
+        .row
+          .col-md-6
+            -#%input(ng-model='AdvertForm.floor' ng-minlength='1'   ng-maxlength='2'){:type => 'text', :placeholder=>'Этаж'}
+            %span Этаж
+            %input(ng-model='AdvertForm.floor' class="form-control"){:type => 'text', :placeholder=>'Этаж'}
+          .col-md-6
+            %span Этажность
+            %input.minmax(ng-model='AdvertForm.floors' class="form-control"){:type => 'text', :placeholder=>'Этажность', :size=>10}
+            -#%input.minmax(ng-model='AdvertForm.floors' ng-minlength='1' maxvalue='{{AdvertForm.floors}}' minvalue='{{AdvertForm.floor}}'  ng-maxlength='2'){:type => 'text', :placeholder=>'Этажность', :size=>10}
+        %br
+        -#.row
+        -#  .col-md-6
+        -#    -#%input.minmax(ng-model='AdvertForm.free_from'  ng-minlength='1'  ){:type => 'text',:placeholder=>'Свободно с'}
+        -#
+        -#    %p.input-group
+        -#      %input.form-control{"close-text" => "Close",  "datepicker-options" => "dateOptions", "datepicker-popup" => "yyyy/MM/dd", "is-open" => "opened1", :max => "'2020-06-22'", :min => "2000-06-22", "ng-model" => "AdvertForm.free_from", "ng-required" => "true", :type => "text",:placeholder=>'Свободно с'}
+        -#      -#%span.input-group-btn
+        -#      -#  %button.btn.btn-default{"ng-click" => "open($event)"}
+        -#      -#    %i.glyphicon.glyphicon-calendar
+        -#  .col-md-6
+        -#    -#%input.minmax(ng-model='AdvertForm.free_to' ng-minlength='1'    ){:type => 'text', :placeholder=>'Свободно по'}
+        -#    %p.input-group
+        -#      %input.form-control{"close-text" => "Close",  "datepicker-options" => "dateOptions", "datepicker-popup" => "yyyy/MM/dd", "is-open" => "opened2", :max => "'2020-06-22'", :min => "2000-06-22", "ng-model" => "AdvertForm.free_to", "ng-required" => "true", :type => "text", :placeholder=>'Свободно по'}
+        -#      -#%span.input-group-btn
+        -#      -#  %button.btn.btn-default{"ng-click" => "open($event)"}
+        -#      -#    %i.glyphicon.glyphicon-calendar
+        -#    %br
+
+        .row
+          .col-md-4
+            Тип комнат:
+
+          .col-md-4
+            Смежные
+            %input{'ng-model' => 'AdvertForm.room_type', :type => 'radio', :value => '0'}
+          .col-md-4
+            Раздельные
+            %input{'ng-model' => 'AdvertForm.room_type', :type => 'radio', :value => '1'}
+
+
+      .col-md-6
+        .row
+          .col-md-6
+            %span Тип пола
+            %select(ng-model='AdvertForm.floor_type_id' data-placeholder='Тип пола' ui-select2 ='select2opts1')
+              %option{:value => ''}
+              %option(ng-repeat='floor_type in floor_types' value='{{floor_type.id}}')
+                {{floor_type.name}}
+          .col-md-6
+            %span Состояние ремонта
+            %select(ng-model='AdvertForm.state_repair_id' data-placeholder='Состояние ремонта' ui-select2 ='select2opts1')
+              %option{:value => ''}
+              %option(ng-repeat='state_repair in state_repairs' value='{{state_repair.id}}')
+                {{state_repair.name}}
+
+          .col-md-6
+            -#%input(ng-model='AdvertForm.landsize' ng-minlength='1' ng-maxlength='2'){:type => 'text', :placeholder=>'Земельный участок', :size=>10}
+            %span Земельный участок
+            %input(ng-model='AdvertForm.landsize' class="form-control" class="form-control"){:type => 'text', :placeholder=>'Земельный участок', :size=>10}
+
+
+        %br
+        .row
+          .col-md-6(fancy-field)
+            -#%input.minmax(ng-model='AdvertForm.area'  ng-minlength='1'  ng-maxlength='10'){:type => 'text',:placeholder=>'Общая пл.'}
+            %span Общая пл.
+            %input.minmax(ng-model='AdvertForm.area' class="form-control" ){:type => 'text',:placeholder=>'Общая пл.'}
+          .col-md-6
+            -#%input.minmax(ng-model='AdvertForm.life_area' required ng-minlength='1'    ng-maxlength='10'){:type => 'text', :placeholder=>'Жилая пл.' }
+            %span Жилая пл.
+            %input.minmax(ng-model='AdvertForm.life_area' class="form-control" required ){:type => 'text', :placeholder=>'Жилая пл.' }
+          .col-md-6
+            -#%input.minmax(ng-model='AdvertForm.kitchen' ng-minlength='1' ng-maxlength='10'){:type => 'text', :placeholder=>'Пл. кухни' }
+            %span Пл. кухни
+            %input.minmax(ng-model='AdvertForm.kitchen' class="form-control"){:type => 'text', :placeholder=>'Пл. кухни' }
+          .col-md-6
+            -#%input(ng-model='AdvertForm.ceill_height' ng-minlength='1' ng-maxlength='10'){:type => 'text', :placeholder=>'Потолки (м)' }
+            %span Потолки (м)
+            %input(ng-model='AdvertForm.ceill_height' class="form-control"){:type => 'text', :placeholder=>'Потолки (м)' }
+        %br
+      .col-md-6
+        .row
+          .col-md-6
+            -#%input(ng-model='AdvertForm.rooms' ng-minlength='1' ng-maxlength='2'){:type => 'number', :placeholder=>'Кол-во комнат', :size=>10}
+            %span Кол-во комнат
+            %input(ng-model='AdvertForm.rooms' class="form-control"){:type => 'number', :placeholder=>'Кол-во комнат', :size=>10}
+          .col-md-6
+            -#%input(ng-model='AdvertForm.wcCount' ng-minlength='1' ng-maxlength='2'){:type => 'number', :placeholder=>'Кол-во санузлов', :size=>10}
+            %span Кол-во санузлов
+            %input(ng-model='AdvertForm.wc_count'class="form-control"){:type => 'number', :placeholder=>'Кол-во санузлов', :size=>10}
+      .col-md-6
+
+      .col-md-12
+        %hr
+          %h4 Фото
+        .col-md-12
+          .col-md-3
+            Главное фото
+            %input(ng-model='photo' file-upload){:type=>'file'}
+            %img.img-block(ng-src='{{AdvertForm.currentImage}}')
+          .col-md-9
+            %input(ng-model='images' additional-file-upload multiple ng-disabled='predicate = check; check=!AdvertForm.currentImage.length>0'){:type=>'file'}
+            %br
+            %br
+            %ul
+              %li(ng-repeat='image in images' )
+                .col-md-4
+
+                  %img.img-block(ng-src='{{image.url}}')
+
+                  -#%input(ng-model='image.id' file-upload){:type=>'file'}
+                  %a{:href => "", "ng-click" => "removeImage(image.id, $index,1)"} Удалить
+
+      .col-md-12
+        %hr
+          %h4 Планировка
+        .col-md-12
+          .col-md-3
+            Главный план
+            %input(ng-model='layout'  file-upload){:type=>'file'}
+            %img.img-block(ng-src='{{currentLayout}}')
+          .col-md-9
+            %input(ng-model='layouts' additional-file-upload multiple ng-disabled='predicate = check; check=!currentLayout.length>0'){:type=>'file'}
+            %ul
+              %li
+              %li(ng-repeat='image in layouts' )
+                .col-md-4
+                  %img.img-block(ng-src='{{image.url}}')
+                  -#%input(ng-model='image.id' file-upload){:type=>'file'}
+                  %a{:href => "", "ng-click" => "removeImage(image.id, $index, 0)"} Удалить
+
+      .col-md-12
+        %hr
+          %h4 Видео
+        .col-md-12
+          .col-md-6
+            Главное видео
+            %textarea(ng-model='AdvertForm.video' class="form-control")
+            .col-md-6{"ng-bind-html-unsafe" => "AdvertForm.video"}
+
+        .col-md-12
+          Доп. видео
+
+          [
+          %a{:href => "", "ng-click" => "addVideo()"} добавить
+          ]
+
+          %div(ng-repeat = "video in videos")
+            .col-md-6
+              %textarea( class="form-control"){"ng-model" => "video.value", :required => "", :type => "text" ,"value"=>"{{video.value}}"}
+            .col-md-6
+              %a{:href => "", "ng-click" => "removeVideo(video, $index)"} Удалить
+            -#.col-md-12{"ng-bind-html" => "video.value | to_trusted"}
+
+      .col-md-12
+        %hr
+          %h4 Цена
+      .col-md-12
+        .col-md-3
+          -#%input(ng-model='AdvertForm.price' ng-minlength='1' ng-maxlength='10'){:type => 'text', :placeholder=>'Цена', :size=>10}
+          %span Цена
+          %input(ng-model='AdvertForm.price' class="form-control"){:type => 'text', :placeholder=>'Цена', :size=>10}
+          %span Торг
+          %input(ng-model='AdvertForm.torg'){:type=>'checkbox'}
+        .col-md-3
+          %span Валюта
+          %select(ng-model='AdvertForm.currency_user_id' data-placeholder='Валюта' ui-select2 ='select2opts1')
+            %option{:value => ''}
+            %option(ng-repeat='currency in currency_users' value='{{currency.id}}')
+              {{currency.name}}
+        .col-md-3
+
+          -#%button(type="button"  ng-model="AdvertForm.price_bt" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0")
+          -#%input(ng-model='AdvertForm.price_bt' ng-true-value='1' ng-false-value='0'){:type=>'checkbox'}
+          %input{'ng-model' => 'AdvertForm.price_bt', :type => 'radio', :value => '1'}
+
+          -#%small
+
+          За метр
+          %br
+
+          %input{'ng-model' => 'AdvertForm.price_bt', :type => 'radio', :value => '0'}/
+
+          -#%small
+
+          Общая
+
+        .col-md-3
+          -#%input(ng-model='AdvertForm.commission' ng-minlength='1' ng-maxlength='2'){:type => 'text', :placeholder=>'Комиссия', :size=>10}
+
+          %span Комиссия
+          %input(ng-model='AdvertForm.commission' class="form-control" ){:type => 'text', :placeholder=>'Комиссия', :size=>10}
+
+
+      .col-md-12
+        %hr
+          %h4 Карта
+        .col-md-3
+
+          %span Широта
+          %input(ng-model='AdvertForm.latitude' class="form-control" ){:type => 'text', :placeholder=>'Широта'}
+        .col-md-3
+
+          %span Долгота
+          %input(ng-model='AdvertForm.longitude' class="form-control" ){:type => 'text', :placeholder=>'Долгота'}
+
+      .col-md-12
+        %hr
+        %input.upload-submit(ng-disabled='predicate = check; check=!AdvertForm.currentImage.length>0' ){:type=>'submit'}
+        -#%input.upload-submit{:type=>'submit'}
+
+
+.download_animation(ng-show="downloadAnimation  ")
+  #floatingCirclesG
+    #frotateG_01.f_circleG
+    #frotateG_02.f_circleG
+    #frotateG_03.f_circleG
+    #frotateG_04.f_circleG
+    #frotateG_05.f_circleG
+    #frotateG_06.f_circleG
+    #frotateG_07.f_circleG
+    #frotateG_08.f_circleG

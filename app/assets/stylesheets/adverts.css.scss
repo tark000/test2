@@ -1,0 +1,77 @@
+
+
+.info_bloc {
+  margin: 10px 0 0 0;
+}
+
+.title {
+ color: #4bab1f; font-size: 16px; font-family: Arial;
+}
+
+.info_img {
+  float:left;  margin-left: 10px;
+}
+
+.info_description {
+  float:right;  margin: 10px 10px 10px 0; width:70%; font-family: arial, helvetica; font-size:  small;
+}
+
+.info_link {
+  float:right; margin-right: 276px;
+}
+
+.paginate {
+  text-align: center;
+}
+
+
+
+.current {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.ui-widget
+  {
+  border: 1px solid #007c6d;
+
+}
+.ui-menu
+  {
+  display: block;
+  float: left;
+  list-style: none outside none;
+  margin: 0;
+  padding: 2px;
+}
+.ui-autocomplete
+  {
+  cursor: default;
+  position: absolute;
+}
+
+.ui-menu .ui-menu-item a
+  {
+  display: block;
+
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.ui-widget-content a
+  {
+  color: #007c6d;
+}
+
+.ui-autocomplete { max-height: 200px; overflow-y: scroll; overflow-x: hidden;}
+
+.ui-menu .ui-menu-item a.ui-state-focus,
+.ui-menu .ui-menu-item a.ui-state-active {
+  background-position:-454px -679px;
+  background-repeat:no-repeat;
+  background-color:#fff;
+  border-bottom-color: #dfe3e2;
+  color: #6c6c6c;
+  text-decoration: none;
+}

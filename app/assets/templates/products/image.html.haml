@@ -1,0 +1,10 @@
+.col-sm-12
+  .modal-close
+    .container.slider
+      / enumerate all photos
+      %img.slide{"ng-repeat" => "slide in slides", "ng-show" => "isActive($index)", "ng-src" => "{{slide.imageFull}}", "ng-swipe-left" => "showNext()", "ng-swipe-right" => "showPrev()"}
+      / prev / next controls
+      %a.arrow.prev.hidden-xs{ "ng-click" => "showPrev()"}
+      %a.arrow.next.hidden-xs{ "ng-click" => "showNext()"}
+-#%button.btn.btn-primary{"ng-click" => "ok()"} OK
+.cancel{"ng-click" => "cancel()"}

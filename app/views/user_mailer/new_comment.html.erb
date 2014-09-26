@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<f4>Новый коментарий</f4>
+<p>
+  Тема: <%=  @blog_theme%>
+</p>
+<p>
+  Текст: <%=  @text%>
+</p>
+<p>
+  Пользователь: <%= @user %>
+</p>
+<p>
+  ID пользователя: <%= @user_id %>
+</p>
+<p>
+  Дата: <%=  Time.now.strftime("%m/%d/%Y")%>
+</p>
+<p>
+  Время: <%=  Time.now.strftime("%H:%M")%>
+</p>
+<p>
+  Ссылка: <%= @url %>
+</p>
+</body>
+</html>

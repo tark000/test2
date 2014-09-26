@@ -1,0 +1,106 @@
+%div
+  %div.row
+    .large-12.columns
+      %fieldset
+        %legend
+          %small
+            Поиск
+        .row
+          .large-4.columns
+            %label.right.inline{:for => "right-label", :style => "margin: 0 0 0 0; padding: 0;"} Тип:
+        .row
+          .large-4.columns
+            %input.input_bind{'ng-model' => 'living', :type => 'radio', :value => '0'}/
+            %small
+              комм.
+          .large-3.columns
+            %input.input_bind{'ng-model' => 'living', :type => 'radio', :value => '1'}/
+            %small
+              жилая
+
+
+          .large-3.columns
+            %input.input_bind{'ng-model' => 'living', :type => 'radio', :value => ''}/
+            %small
+              любая
+          -#
+          -#.row
+          -#  .large-12.columns
+          -#    %select(ui-select2="select2Options" ng-model='city' select_bind ng-cloak  data-placeholder='Выберите город')
+          -#      %option{:value => ''}
+          -#      %option(ng-repeat='city in cities' ng-cloak value='{{city.id}}')
+          -#        {{city.name}}
+
+        .row
+          .large-12.columns
+            %hr
+        .row
+          .large-12.columns
+            %select(ui-select2="select2Options" ng-init="select2Options.placeholder='test'" ng-model='category' select_bind ng-cloak  data-placeholder='Выберите категорию')
+              %option{:value => ''}
+              %option(ng-repeat="category in categories" ng-cloak value="{{category.id}}")
+                {{category.name}}
+        .row
+          .large-12.columns
+            %select(ui-select2="select2Options" ng-model='operation' select_bind ng-cloak  data-placeholder='Выберите операцию')
+              %option{:value => ''}
+              %option(ng-repeat='operation in operations' ng-cloak value='{{operation.id}}')
+                {{operation.name}}
+        .row
+          .large-12.columns
+            %select(ui-select2="select2Options" ng-model='city' select_bind ng-cloak  data-placeholder='Выберите город/район')
+              %option{:value => ''}
+              %option(ng-repeat='city in cities' ng-cloak value='{{city.id}}')
+                {{city.name}}
+        .row
+          .large-12.columns
+            %select(ui-select2="select2Options" ng-model='city' select_bind ng-cloak  data-placeholder='Выберите ближайшее метро')
+              %option{:value => ''}
+              %option(ng-repeat='city in cities' ng-cloak value='{{city.id}}')
+                {{city.name}}
+
+
+        .row
+          .large-12.columns
+            %hr
+        .row
+          .large-4.columns
+            %label.right.inline{:for => 'right-label', :style => 'margin: 0 0 0 0; padding: 0;'} Цена:
+          .large-4.columns
+            %input.input_bind(ng-model='price_min' ng-maxlength='6' ng-minlength='1' ng-init='check=true' ng-change='check=!true' ng-pattern='/[0-9]/' placeholder='От'  value="{{price_min}}" ){:type => 'text'}/
+          .large-4.columns
+            %input.input_bind(ng-model='price_max' ng-maxlength='6' ng-minlength='1' ng-change='check=!true' ng-pattern='/[0-9]/' placeholder='До' value="{{price_max}}" ){:type => 'text'}/
+        .row
+          .large-6.columns
+            %input.input_bind(ng-disabled="check"){'ng-model' => 'by_all', :type => 'radio', :value => '1'}/
+            %small
+              Общая
+          .large-6.columns
+            %input.input_bind(ng-disabled="check"){'ng-model' => 'by_all', :type => 'radio', :value => '0'}/
+            %small
+              За метр2
+        .row
+          .large-12.columns
+            %hr
+        .row
+          .large-4.columns
+            %label.right.inline{:for => 'right-label', :style => 'margin: 0 0 0 0; padding: 0;'} Площадь:
+          .large-4.columns
+            %input.input_bind(ng-model='area_min' ng-maxlength='6' ng-minlength='1'ng-pattern='/[0-9]/' placeholder='От'  value="{{area_min}}" ){:type => 'text'}/
+          .large-4.columns
+            %input.input_bind(ng-model='area_max' ng-maxlength='6' ng-minlength='1'ng-pattern='/[0-9]/'  placeholder='До' value="{{area_max}}" ){:type => 'text'}/
+        .row
+          .large-12.columns
+            %hr
+        .row
+          .large-12.columns
+            %label Карта:
+          .large-6.columns
+            %input.input_bind{'ng-model' => 'map', :type => 'radio', :value => '1'}/
+            %small
+              включть
+          .large-6.columns
+            %input.input_bind{'ng-model' => 'map', :type => 'radio', :value => '0'}/
+            %small
+              выключить
+

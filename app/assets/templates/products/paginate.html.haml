@@ -1,0 +1,24 @@
+.pagination(ng-show="paginShow" )
+
+  %li(ng-class='page_style'ng-cloak ng-show="firstPagin")
+    %a(ng-click="setPage(1)"  ng-cloak){:href=>''}
+      1
+      -#начало
+
+    -#%li(ng-repeat='page in colPages')
+    -#  %a{:href=>''}
+    -#    {{page}}
+  %li.current(ng-show="prevPagin")
+    %a(ng-click="setPrev(currentPage)"){:href=>''}
+      {{currentPage - 1}}
+  %li.current.active
+    %a{:href=>''}
+      {{currentPage}}
+  %li.current(ng-show="nextPagin")
+    %a(ng-click="setNext(currentPage)"){:href=>''}
+      {{currentPage   + 1}}
+  %li(ng-class='page_style' ng-cloak ng-show="lastPagin")
+
+    %a(ng-click="setPage(pages)" ng-cloak ng-disabled="false" ){:href=>''}
+      {{pages}}
+      -#послед

@@ -1,0 +1,52 @@
+.content
+  .index-content1
+    %h3 Свяжитесь с нами
+
+  %p Для отправки нам сообщения, воспользуйтесь нижеприведенной формой
+
+  .back-form
+    .col-md-6.col-xs-12
+      %p
+      %input.form-control(placeholder="Имя"){"ng-model" => "user.name", "smart-float" => "", :type => "text"}
+      %p
+      %input.form-control(placeholder="Электронная почта"){"ng-model" => "user.email", "smart-float" => "", :type => "text"}
+      %p
+      %input.form-control(placeholder="Телефон"){"ng-model" => "user.phone", "smart-float" => "", :type => "text"}
+      %p
+      %textarea.form-control( ng-model="user.comment" placeholder="Коментарий")
+      %p
+      %h3(ng-show = "showMessage")
+        Ваше сообщение отправленно.
+      %button.addional-info(ng-click="send()") Заявка на подробную информацию
+
+  %p
+    На нашем сайте мы можем разместить всего лишь некоторые из предлагаемых нами объектов недвижимости, поэтому, если Вы затрудняетесь найти недвижимость на Ваш вкус, пожалуйста, сообщите нам о Ваших пожеланиях по электронной почте, скайпу или позвоните нам. Мы подберем соответствующие Вашим критериям объекты и свяжемся с Вами. Мы поможем Вам найти дом Вашей мечты!
+  %p
+    Мы будем очень рады видеть вас в нашем главном офисе в Испании,Тенерифе, город Adeje, и в Российской Федерации.
+
+  %p
+    %a(href="https://maps.google.com/maps?q=28.092341,-16.739945&num=1&t=m&z=17")
+      Приходите к нам обязательно!
+    %br
+    %span(ng-bind-html="map")
+    %br
+    %a(href="https://maps.google.com/maps?q=28.092341,-16.739945&num=1&t=m&z=17")
+      Расположение офиса на карте google
+
+  %p
+    C.Alcalde Walter Paetzmann, Hotel Gran Tacande, 38670, Adeje, Tenerife, España
+    %br
+    tel:   (+34)673-12-00-12
+    %br
+    tel:   (+34)922-71-69-12
+    %br
+    tel:   (+34)683-61-67-28
+    %br
+    Email: office@costatenerife.com
+
+  %p
+    для звонков из Москвы и Российской Федерации +74996388450
+
+  %p
+    для звонков из Украины   +380503903323
+  %span(ng-bind-html="mapPhoto")

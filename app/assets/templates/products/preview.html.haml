@@ -1,0 +1,33 @@
+.index_block
+  .preview-image
+    %a(ui-sref="show({id:advert.slug})")
+      %img.index_img(ng-src="{{advert.main_photo}}" ng-cloak )
+      .preview-box
+
+  .index-info
+    .index-city
+      -#.city-icon
+      %span(ng-bind="advert.city")
+    .index-key
+      %span(ng-bind="advert.operation")
+    .index-category
+      %span(ng-bind="advert.category")
+
+
+    .index-area
+      -#.area-icon
+      %span(ng-bind="advert.area")
+      м
+      %sup 2
+    %a(ui-sref="show({id:advert.slug})")
+.info-button
+  %button.button-share(ui-sref="show({id:advert.slug})" ){:type => "button"} Подробнее
+  %button.button-add(ng-click="addFavorite(advert)"  ng-hide= "advert.inBasket" tooltip="Добавить в избранное")
+  %button.button-remove(ng-click="removeFavorite(advert)" ng-show = "advert.inBasket" tooltip="Удалить из избранного")
+    {{"-"}}
+
+  .price
+    %span(ng-bind="advert.price | myCurrency:''" ng-hide="by_all")
+    %span(ng-bind="advert.all_price | myCurrency:''" ng-show="by_all")
+    грн
+

@@ -1,0 +1,362 @@
+.navbar(style="background: url(#{Rails.root}/app/assets/images/logo.png) 7% center no-repeat #fff")
+
+  .id
+
+    ID
+    = advert.id
+.content
+
+  %p.info
+
+    - if advert.photo.present?
+
+      .big-img
+        %img(src="#{Rails.root}/public/#{advert.photo.slider_fit.url}" style="max-width:600px; max-height: 600px;")
+
+    %p
+
+      - if advert.title.present?
+        %h4
+          = advert.title
+
+      .params
+
+        - if advert.operation_type.present?
+          .param
+            %td.text Операция:
+            %td.text.value
+              = advert.operation_type.name
+
+        - if advert.category.present?
+          .param
+            %td.text Категория:
+            %td.text.value
+              = advert.category.name
+
+        - if advert.price.present?
+          .param
+            %td.text
+              Цена
+              за м2:
+
+            %td.text.value
+              = advert.price
+
+        - if advert.all_price.present?
+          .param
+            %td.text Цена:
+
+            %td.text.value
+              = advert.all_price
+
+        - if advert.currency_user.present?
+          .param
+            %td.text Валюта:
+            %td.text.value
+              = advert.currency_user.name
+
+        - if advert.house_type.present?
+          .param
+            %td.text Тип дома:
+            %td.text.value
+              = advert.house_type.name
+
+        - if advert.region.present?
+          .param
+            %td.text Область:
+            %td.text.value
+              = advert.region.name
+
+        - if advert.city.present?
+          .param
+            %td.text Город:
+            %td.text.value
+              = advert.city.name
+        - if advert.district.present?
+          .param
+            %td.text Район:
+            %td.text.value
+              = advert.district.name
+
+        - if advert.street.present?
+          .param
+            %td.text Улица:
+            %td.text.value
+              = advert.street.name
+
+        - if advert.house.present?
+          .param
+            %td.text Номер дома:
+            %td.text.value
+              = advert.house
+
+        - if advert.rooms.present?
+          .param
+            %td.text Количество комнат:
+            %td.text.value
+              = advert.rooms
+
+        - if advert.floor.present?
+          .param
+            %td.text Этаж:
+            %td.text.value
+              = advert.floor
+
+        - if advert.floors.present?
+          .param
+            %td.text Этажность:
+            %td.text.value
+              = advert.floors
+          -#- if advert.purpouse_land.present?
+          -#  .param
+          -#    %td.text Категория
+          -#    %td.text.value
+          -#      = advert.purpouse_land.name
+        - if advert.landsize.present?
+          .param
+            %td.text Земельный участок м2:
+            %td.text.value
+              = advert.landsize
+
+        - if advert.life_area.present?
+          .param
+            %td.text Жилая площадь м2:
+            %td.text.value
+              = advert.life_area
+
+        - if advert.kitchen.present?
+          .param
+            %td.text Кухня м2:
+            %td.text.value
+              = advert.kitchen
+
+        -#- if advert.home_deadline.present?
+        -#  .param
+        -#    %td.text Категория
+        -#    %td.text.value
+        -#      = advert.home_deadline
+
+        - if advert.floor_type.present?
+          .param
+            %td.text Тип пола:
+            %td.text.value
+              = advert.floor_type.name
+
+        - if advert.wc_count.present?
+          .param
+            %td.text Кол-во санузлов:
+            %td.text.value
+              = advert.wc_count
+
+        - if advert.state_repair.present?
+          .param
+            %td.text Состояние ремонта:
+            %td.text.value
+              = advert.state_repair.name
+
+        - if advert.ceill_height.present?
+          .param
+            %td.text Потолки (м):
+            %td.text.value
+              = advert.ceill_height
+
+        - if advert.metro_station.present?
+          .param
+            %td.text Метро:
+            %td.text.value
+              = advert.metro_station.name
+
+        -#- if advert.door.present?
+        -#  .param
+        -#    %td.text Категория
+        -#    %td.text.value
+        -#      = advert.door.name
+        - if advert.business_center_class.present?
+          .param
+            %td.text Класс Бизнес Центра:
+            %td.text.value
+              = advert.business_center_class.name
+
+        - if advert.cabinetcount.present?
+          .param
+            %td.text Кол-во кабинетов:
+            %td.text.value
+              = advert.cabinetcount
+
+        - if advert.flat_type.present?
+          .param
+            %td.text Тип квартиры:
+            %td.text.value
+              = advert.flat_type.name
+        -#- if advert.rooms_type.present?
+        -#  .param
+        -#    %td.text Категория
+        -#    %td.text.value
+        -#      = advert.rooms_type.name
+        - if advert.free_from.present?
+          .param
+            %td.text Свободно до:
+            %td.text.value
+              = Time.parse(advert.free_from).strftime("%D")
+
+
+        - if advert.free_to.present?
+          .param
+            %td.text Свободно с:
+            %td.text.value
+              = Time.parse(advert.free_to).strftime("%D")
+
+
+        -#- if advert.cities[0].present?
+        -#  .param
+        -#    %td.text Город
+        -#    %td.text.value
+        -#      = advert.cities[0].name
+        -#- if advert.categories != []
+        -#  .param
+        -#    %td.text Категории
+        -#    %td.text
+        -#      = advert.categories.map{|a| a.name}.join(', ')
+        - if advert.area.present?
+          .param
+            %td.text Площадь:
+            %td.text.value
+              = advert.area
+              м2
+
+        - if advert.floor.present? && advert.floor > 0
+          .param
+            %td.text Этаж:
+            %td.text.value
+              = advert.floor
+        - if advert.floors.present? && advert.floors > 0
+          .param
+            %td.text Этажность:
+            %td.text.value
+              = advert.floors
+        - if advert.wc_count.present? && advert.wc_count > 0
+          .param
+            %td.text Ванных комнат:
+            %td.text.value
+              = advert.wc_count
+        - if advert.rooms.present? && advert.rooms > 0
+          .param
+            %td.text Количество комнат:
+            %td.text.value
+              = advert.rooms
+  .decription
+    %h3 Описание
+    .text
+      = raw advert.description.first(500) if advert.description.present?
+
+.page-break
+.navbar(style="background: url(#{Rails.root}/app/assets/images/logo.png) 7% center no-repeat #fff")
+
+  .id
+
+    ID
+    = advert.id
+.content
+
+
+
+
+
+
+
+
+
+
+
+
+  -#- if advert.main_photo.present?
+  -#  .img
+  -#    %img(src="#{Rails.root}/public/#{advert.main_photo.slider_fit.url}" )
+  %br
+  %br
+
+
+  - if advert.advert_images != []
+    - i = 0
+    - while i <= 9
+      -if advert.advert_images[i].present?
+        .img(style="width:240px; height: 160px; text-align: center; float:left; display: block; margin-right: 2px; margin-bottom: 2px;" )
+
+          %img(src="#{Rails.root}/public/#{advert.advert_images[i].image.slider_fit.url}" style="max-width:240px; height: 160px;")
+      - i += 1
+.free-space
+.footer
+
+  www.dorohouse.com.ua
+  %br
+  Email: info@dorohouse.com
+  %br
+  Телефон: (067) 234 48 36
+  %br
+  Секретариат: (044) 228 72 92
+  %br
+  Факсы: (044) 524 52 45; (044) 524 52 46
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////
+
+
+
+
+
+
+
+-#.id
+-#  ID
+-#  = advert.id
+-#
+-#-#%img(src="#{Rails.root}/public/#{advert.main_photo.slider_fit.url}")
+-#-#- if advert.longitude.present?
+-#-#  %img(src="#{Rails.root}/public/#{advert.main_photo.slider_fit.url}")
+-#-#
+-#-#  %img(src="#{Rails.root}/#{advert.mapaddress}")
+-#-#- else
+-#-#  %img(src="#{Rails.root}/public/#{advert.main_photo.slider_fit.url}")
+-#.price
+-#  Цена:
+-#  = advert.price
+-#  EUR
+-#
+-#
+-#
+-#
+-#
+-#
+-#%p
+-#  %h3 Описание
+-#  .text
+-#    = raw advert.description if advert.description.present?
+-#
+-#%br
+-#%br
+-#- if advert.photo.present?
+-#  .img
+-#    %img(src="#{Rails.root}/public/#{advert.photo.slider_fit.url}" style="width:205px; height: 122px;")
+-#
+-#- if advert.advert_images != []
+-#  - advert.advert_images.each do |img|
+-#    .img
+-#
+-#      %img(src="#{Rails.root}/public/#{img.image.slider_fit.url}" style="width:205px; height: 122px;")
+-#
+-#
+-#
+-#%br
+-#
+-#%h3

@@ -1,0 +1,61 @@
+.row
+  .large-12.columns.show_info
+    %ul.small-block-grid-2.large-block-grid-4
+      %li{"ng-if" => "show(advert.operationType.name)"} Операция
+      %li{"ng-if" => "show(advert.operationType.name)"}
+        {{advert.operationType.name}}
+      %li{"ng-if" => "show(advert.allPrice)"} Цена
+      %li{"ng-if" => "show(advert.allPrice)"}
+        {{advert.allPrice}}
+      %li{"ng-if" => "show(advert.area)"} Площадь
+      %li{"ng-if" => "show(advert.area)"}
+        {{advert.area}}
+      %li{"ng-if" => "show(advert.lifeArea)"} Жилая площадь
+      %li{"ng-if" => "show(advert.lifeArea)"}
+        {{advert.lifeArea}} м
+      %li{"ng-if" => "show(advert.region)"} Регион
+      %li{"ng-if" => "show(advert.region)"}
+        {{advert.region}}
+      %li{"ng-if" => "show(advert.city)"}Город
+      %li{"ng-if" => "show(advert.city)"}
+        {{advert.city.name}}
+      %li{"ng-if" => "show(advert.district)"} Район
+      %li{"ng-if" => "show(advert.district)"}
+        {{advert.district}}
+      %li{"ng-if" => "show(advert.street.name)"} Улица
+      %li{"ng-if" => "show(advert.street.name)"}
+        {{advert.street.name}}
+
+      %li{"ng-if" => "show(advert.floor)"} Этаж
+      %li{"ng-if" => "show(advert.floor)"}
+        {{advert.floor}}
+      %li{"ng-if" => "show(advert.rooms)"} Количество комнат
+      %li{"ng-if" => "show(advert.rooms)"}
+        {{advert.rooms}}
+      %li{"ng-if" => "show(advert.category.name)"} Категория
+      %li{"ng-if" => "show(advert.category.name)"}
+        {{advert.category.name}}
+      %li{"ng-if" => "show(advert.houseType.name)"} Тип дома
+      %li{"ng-if" => "show(advert.houseType.name)"}
+        {{advert.houseType.name}}
+      %li{"ng-if" => "show(advert.flatType.name)"} Тип квартиры
+      %li{"ng-if" => "show(advert.flatType.name)"}
+        {{advert.flatType.name}}
+      %li{"ng-if" => "show(advert.ceillHeight)"} Высота потолков
+      %li{"ng-if" => "show(advert.ceillHeight)"}
+        {{advert.ceillHeight}} м
+      %li{"ng-if" => "show(advert.kitchen)"} Площадь кухни
+      %li{"ng-if" => "show(advert.kitchen)"}
+        {{advert.kitchen}} м2
+      %li{"ng-if" => "show(advert.wcCount)"} Кол-во санузлов
+      %li{"ng-if" => "show(advert.wcCount)"}
+        {{advert.wcCount}}
+      %li{"ng-if" => "show(advert.stateRepair)"} Состояние ремонта
+      %li{"ng-if" => "show(advert.stateRepair)"}
+        {{advert.stateRepair.name}}
+
+.row
+  .large-12.columns.show_description
+    %p
+      {{advert}}
+

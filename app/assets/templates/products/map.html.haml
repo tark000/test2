@@ -1,0 +1,25 @@
+.content
+  .index-content
+    %gm-map(gm-map-id="'myMap'" gm-center="center" gm-map-options="options.map"   class="map" ng-class='whatClassIsIt(class)' gm-zoom="zoom" gm-bounds="latlngbounds" gm-map-type-id="mapTypeId" )
+      %gm-markers(gm-objects="markers"  gm-id="object.id"  gm-position="{ lat: object.location.lat, lng: object.location.lng }"
+      gm-get-marker-options="getAdvertOpts(object)" gm-on-click="selectAdvert(object, marker)")
+
+  .search-rez
+    .index-content
+      %ul.col-lg-12
+
+        %li.col-lg-3.thumbnail(class="result" ng-repeat="advert in dubl[advert.check].ids | orderBy:predicate:reverse " class="my-repeat-animation" ng-style="lineStyle" class="line-new" ng-cloak  )
+
+          .include-example{"ng-include" => "'/assets/products/preview.html'"}
+
+
+.download_animation(ng-show="downloadAnimation  ")
+  #floatingCirclesG
+    #frotateG_01.f_circleG
+    #frotateG_02.f_circleG
+    #frotateG_03.f_circleG
+    #frotateG_04.f_circleG
+    #frotateG_05.f_circleG
+    #frotateG_06.f_circleG
+    #frotateG_07.f_circleG
+    #frotateG_08.f_circleG

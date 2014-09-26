@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body style="margin: 0; padding: 0;">
+<div class="navbar" style="background:url(<%= "#{@url}/assets/logo.png" %>) 7% center no-repeat #fff; color: #333;padding: 0; margin: 0; min-height: 69px; width: 100%;">
+
+  <div class="id" style="padding: 20px; float: right; font-size: 20px;">
+
+
+    ID
+    <%= @advert.id %>
+  </div>
+</div>
+<div class="content" style="padding: 0 30px;">
+<p class="info" style="text-align: center;">
+  <!--http://dorohouse.resumeo.me/uploads/advert/photo/577/slider_fit_IMG_2089.JPG-->
+  <!--&lt;!&ndash;<img src="http://dorohouse.resumeo.me/uploads/advert/photo/583/slider_fit_130620131034.jpg" >&ndash;&gt;-->
+  <!--ksymax-->
+  <!--<img src="http://dorohouse.resumeo.me/uploads/img/photo/581/slider_fit_IMG_5388.JPG" >-->
+  <!--<img src="http://dorohouse.resumeo.me/uploads/advert/photo/581/slider_fit_IMG_5388.JPG" >-->
+  <!--<br>-->
+  <!--dorohous-->
+  <!--<img src="http://dorohouse.resumeo.me/uploads/advert/photo/577/slider_fit_IMG_2089.JPG" >-->
+  <!--<br>-->
+  <!--icn-->
+  <!--<img src="http://icn.ua/uploads/page/image/2/index_icn_maind1.jpg" >-->
+  <!--<br>-->
+  <!--costa-->
+  <!--<img src="http://costa.resumeo.me/uploads/advert/photo/209/slider_fit_fc924030-9cd4-0131-b862-5404a61a95c1.JPG" >-->
+  <!--<img src="http://dorohouse.resumeo.me/uploads/advert/photo/583/slider_fit_130620131034.jpg" >-->
+  <% if @advert.photo.present? %>
+    <div class="big-img" style="text-align: center;">
+      <a href="<%= @url + "/adverts/" + @advert.slug %>">
+        <!--ksymax-->
+        <!--<img src="http://dorohouse.resumeo.me/uploads/img/photo/581/slider_fit_IMG_5388.JPG" >-->
+        <img src=<%=  @url + @advert.photo.slider_fit.url %> style="max-width:600px; ">
+      </a>
+    </div>
+<% end %>
+
+<p>
+  <% if @advert.title.present? %>
+    <h4>
+     <a href="<%= @url + "/adverts/" + @advert.slug %>"><%= @advert.title %></a>
+    </h4>
+<% end %>
+<div class="params" style="display: inline-block;">
+<% if @advert.operation_type.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Операция:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.operation_type.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.category.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px" style = "font-size: 18px">Категория:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.category.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.price.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px" style = "font-size: 18px">
+        Цена
+        за м2:
+      </td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.price %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.all_price.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px" style = "font-size: 18px">Цена:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.all_price %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.currency_user.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Валюта:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.currency_user.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.house_type.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Тип дома:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.house_type.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.region.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Область:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.region.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.city.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Город:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.city.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.district.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Район:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.district.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.street.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Улица:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.street.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.house.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Номер дома:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.house %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.rooms.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Количество комнат:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.rooms %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.floor.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Этаж:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.floor %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.floors.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Этажность:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.floors %>
+      </td>
+    </div>
+    <% #- if @advert.purpouse_land.present? %>
+    <% #  .param %>
+    <% #    %td.text Категория %>
+    <% #    %td.text.value %>
+    <% #      = @advert.purpouse_land.name %>
+<% end %>
+<% if @advert.landsize.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Земельный участок м2:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.landsize %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.life_area.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Жилая площадь м2:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.life_area %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.kitchen.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Кухня м2:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.kitchen %>
+      </td>
+    </div>
+<% end %>
+<% #- if @advert.home_deadline.present? %>
+<% #  .param %>
+<% #    %td.text Категория %>
+<% #    %td.text.value %>
+<% #      = @advert.home_deadline %>
+<% if @advert.floor_type.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Тип пола:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.floor_type.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.wc_count.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Кол-во санузлов:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.wc_count %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.state_repair.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Состояние ремонта:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.state_repair.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.ceill_height.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Потолки (м):</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.ceill_height %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.metro_station.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Метро:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.metro_station.name %>
+      </td>
+    </div>
+<% end %>
+<% #- if @advert.door.present? %>
+<% #  .param %>
+<% #    %td.text Категория %>
+<% #    %td.text.value %>
+<% #      = @advert.door.name %>
+<% if @advert.business_center_class.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Класс Бизнес Центра:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.business_center_class.name %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.cabinetcount.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Кол-во кабинетов:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.cabinetcount %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.flat_type.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Тип квартиры:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.flat_type.name %>
+      </td>
+    </div>
+<% end %>
+<% #- if @advert.rooms_type.present? %>
+<% #  .param %>
+<% #    %td.text Категория %>
+<% #    %td.text.value %>
+<% #      = @advert.rooms_type.name %>
+<% if @advert.free_from.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Свободно до:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= Time.parse(@advert.free_from).strftime("%D") %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.free_to.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Свободно с:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= Time.parse(@advert.free_to).strftime("%D") %>
+      </td>
+    </div>
+<% end %>
+<% #- if @advert.cities[0].present? %>
+<% #  .param %>
+<% #    %td.text Город %>
+<% #    %td.text.value %>
+<% #      = @advert.cities[0].name %>
+<% #- if @advert.categories != [] %>
+<% #  .param %>
+<% #    %td.text Категории %>
+<% #    %td.text %>
+<% #      = @advert.categories.map{|a| a.name}.join(', ') %>
+<% if @advert.area.present? %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Площадь:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.area %>
+        м2
+      </td>
+    </div>
+<% end %>
+<% if @advert.floor.present? && @advert.floor > 0 %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Этаж:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.floor %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.floors.present? && @advert.floors > 0 %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Этажность:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.floors %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.wc_count.present? && @advert.wc_count > 0 %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Ванных комнат:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.wc_count %>
+      </td>
+    </div>
+<% end %>
+<% if @advert.rooms.present? && @advert.rooms > 0 %>
+    <div class="param" style="float: left; display: block; width: 30%; border: 1px solid #cccccc; padding: 2px; display: table-cell; line-height: 14px; min-height: 28px;  text-align: center;">
+      <td class="text" style = "font-size: 18px">Количество комнат:</td>
+      <td class="text value" style = "font-size: 18px; font-weight: bold; ">
+        <%= @advert.rooms %>
+      </td>
+    </div>
+<% end %>
+</div>
+</p>
+</p>
+<div class="decription">
+  <h3>Описание</h3>
+  <div class="text" style = "font-size: 18px">
+    <%= raw @advert.description.first(500) if @advert.description.present? %>
+  </div>
+</div>
+</div>
+
+<div class="content">
+
+  <br/>
+  <br/>
+  <% if @advert.advert_images != [] %>
+      <% i = 0 %>
+      <% while i <= 8 %>
+          <% if @advert.advert_images[i].present? %>
+              <div class="img" style="width:100%;  border: none; text-align: center; margin: 5px;">
+
+
+
+
+                <!--<%=  @url + @advert.advert_images[i].image.slider_fit.url %>-->
+                <!--<img src="http://dorohouse.resumeo.me/uploads/img/photo/581/slider_fit_IMG_5388.JPG" style="width:350px; margin: 5px;">-->
+                <img src=<%=  @url + @advert.advert_images[i].image.slider_fit.url %>  style="width:350px; margin: 5px;" >
+              </div>
+          <% end %>
+          <% i += 1 %>
+      <% end %>
+  <% end %>
+</div>
+
+<div class="footer" style="width: 100%; text-align: center; display: inline-block; padding: 15px 50px; color: #355335; font-size: 18px;">
+   
+  www.dorohouse.com.ua
+  <br/>
+  Email: info@dorohouse.com
+  <br/>
+  Телефон: (067) 234 48 36
+  <br/>
+  Секретариат: (044) 228 72 92
+  <br/>
+  Факсы: (044) 524 52 45; (044) 524 52 46
+</div>
+
+
+
+
+
+
+
+</body>
+</html>
+
+

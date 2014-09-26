@@ -1,0 +1,172 @@
+.top-top-bar
+
+
+  .container
+    %a{:href => "/"}
+      .but_home
+    %a(href="mailto:info@dorohouse.com")
+      .but_contacts
+    .icon-phone-text
+      .phone_num
+        Аренда офисов, кабинетов, складов и магазинов в Киеве без комиссии
+    .icon-phone
+      %i
+
+      .phone_num
+        067 234 48 36
+        -#+38 (067) 234 48 36
+      -#.skype_log
+      -#  skype: vd3600
+
+    .top-socsety
+      %ul.social-list
+
+        %li
+          %a(href=' http://vk.com/dorohouserealestate' target="_blank")
+            .vkontakte
+        %li
+          %a(href="https://www.facebook.com/pages/Dorohouse/210301309039554?ref=hl" target="_blank")
+            .facebook
+        %li
+          %a(href="https://plus.google.com/u/0/b/112095504974031363448/112095504974031363448/photos " target="_blank")
+            .google
+        %li
+          %a(href="https://twitter.com/DOROHOUSE_VD" target="_blank")
+            .twitter
+        %li
+          %a(href='https://www.linkedin.com/groups/DOROHOUSE-real-estate-4211796?home=&gid=4211796&trk=groups_item_list_abbreviated-h-logo' target="_blank")
+            .linkedin
+        -#%li.ng-social-rss
+        -#  .rss
+        .sign-in-icon(ng-hide="current.auth")
+          %a(ng-href="/sign_in" )
+        .user-icon(ng-if="current.auth")
+          .dropdown
+            %a{"data-toggle" => "dropdown"}
+              .user-icon-dropdown
+            %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
+              %li
+                %a(href="/adverts_new" ng-if="current.user.admin")
+                  Добавить новую обьяву
+              %li
+                %a(href="/admin" target="_blank" ng-if="current.user.admin || current.user.lawyer")
+                  Админка
+              %li
+                %a(href="https://dorohous.mantishub.com" target="_blank" ng-if="current.user.admin")
+                  Mantis
+              %li
+                %a(ng-click = "logout()" )
+                  Выход
+
+
+
+.nav.navbar.navbar-default{:role => "navigation"}
+  .container
+    .navbar-header
+      %button.navbar-toggle(ng-click = "addClassIn()")
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a{:href => "/"}
+        .logo(ng-click="$spMenu.toggle()")
+        
+    %nav.collapse.navbar-collapse.bs-navbar-collapse{:role => "navigation"}
+
+      %ul.nav.navbar-nav
+        %li(ng-class="{ active: isActive('/adverts')}" ng-click = "addClassIn()")
+          %a{:href => "/"} Недвижимость
+        -#%li
+        -#  %a{:href => "/"} Компании
+        %li(ng-class="{ active: isActive('/notariat')}" ng-click = "addClassIn()")
+          %a{:href => "/notariat"} Нотариат
+        %li(ng-class="{ active: isActive('/lawyer')}" ng-click = "addClassIn()")
+          -#%a{:href => "/lawyer"} Адвокат
+          %a{:href => "#"} Адвокат
+        %li
+          %a(target="_blank"){:href => "http://www.dorohouse.com/interiors/realty:Design"}
+            Архитектура
+        %li(ng-class="{ active: isActive('/management')}" ng-click = "addClassIn()")
+          %a{:href => "/management"} Управление недвижимостью
+
+
+
+
+      .choose-but(ng-click="showFavorites()")
+
+        Выбранные варианты
+        .favorites-count
+          {{favoritesCount}}
+      %alert{:close => "closeAlert($index)", "ng-repeat" => "alert in alerts", :type => "alert.type"} {{alert.msg}}
+
+
+
+.search.top
+  .mobile-hide
+    .search-realty
+      Поиск Недвижимости
+
+
+    .main-realty
+
+      %a{:href => "/adverts"}
+        Главная
+      {{"-"}}
+      %a(href="/adverts" ng-show="isActive('/adverts')")
+        Недвижимость
+      %a(href="/notariat" ng-show="isActive('/notariat')")
+        Нотариат
+      %a(href="/lawyer" ng-show="isActive('/lawyer')")
+        Адвокат
+      %a(href="/management" ng-show="isActive('/management')")
+        Управление недвижимостью
+      %a(href="/search" ng-show="isActive('/search')")
+        Поиск
+      %a(href="/lawyer" ng-show="isActive('/blogs')")
+        Адвокат
+
+
+    -#.search-bg-crumbs
+
+  %form.search-form
+    -#%input.search-input( auto-complete  ng-model="selected"){:placeholder => "Поиск", :type => "search"}
+    %input.search-input(  ng-model="selected" ng-enter="searchBut(selected)"){:placeholder => "Поиск", :type => "search"}
+    %button.btn-search(ng-click="searchBut(selected)"){:type => "button"}
+    %a#start_find{:href => "#", :title => "поиск"}
+
+
+-#%nav.navbar.navbar-default{:role => "navigation"}
+-#
+-#  .logo(ng-click="$spMenu.toggle()")
+-#
+-#  %ul.nav.navbar-nav
+-#    %li.active
+-#      %a{:href => "/"} Недвижимость
+-#    %li
+-#      %a{:href => "/"} Компании
+-#    %li
+-#      %a{:href => "/"} Новости
+-#    %li
+-#      %a{:href => "/"} Контакты
+-#  %button.btn-default-add{:type => "button"} Добавить
+-#  %button.btn-default-enter{:type => "button"} Вход
+-#
+-#
+-#  .search
+-#    .search-realty
+-#    -#.search-realty.result
+-#
+-#
+-#    .main-realty
+-#
+-#    -#.search-bg-crumbs
+-#
+-#    %form.search-form
+-#      %input.search-input{:placeholder => ""}
+-#      %button.btn-search{:type => "button"}
+
+    -#%form.search-form
+    -#  %input.search-input( auto-complete  ng-model="selected"){:placeholder => "Поиск", :type => "search"}
+    -#  %button.btn-search{:type => "button"}
+    -#  %a#start_find{:href => "#", :title => "поиск"}
+

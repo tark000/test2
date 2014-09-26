@@ -1,0 +1,92 @@
+.footer
+  -#.div
+  -#  .triangle.triangle-upf.visible-xs(ng-click="footerMainShow()")
+  .footer-main
+    .footer-block-costa.footer-costa.col-xs-12
+      %span.footer-about
+        Dorohouse
+      %ul.footer-list
+        %li
+
+          %a{:href => "/adverts"}
+            Недвижимость
+        %li
+          %a{:href => "/notariat"}
+
+            Нотариат
+        %li
+          %a{:href => "/lawyer"}
+            Адвокат
+
+        %li
+          %a(target="_blank"){:href => "http://www.dorohouse.com/interiors/realty:Design"}
+            Архитектура
+
+        %li
+          %a{:href => "/management"}
+            Управление недвижимостью
+
+
+    .footer-block-about.footer-contact.col-xs-12
+      %span.footer-about
+        О компании
+      .after-title
+
+        %p Первая Киевская MLS ( Multiple Listing Service ) система классификации недвижимости по видам, локации и типам операций от Управляющей компании Dorohouse. Наша MLS представляет интерес для практикующих риелторов, а также конечных потребителей рынка недвижимости Киева и Украины. Наш MLS формируется собственниками недвижимости, а также риелторами. Основными критериями размещения объекта в MLS являются полнота и правдивость информации. Выбрать недвижимость в Киеве пожалуй на много сложнее чем в других городах Украины. Независимо от условий на помощь приходят агенства недвижимости.
+
+    .footer-block-sub.col-xs-12
+      %span.footer-about
+        Подписка на объекты
+      .after-title
+        %p
+          Вы можете быть в курсе всех новых предлоджений от Управляющей компании Dorohouse.
+          %br
+          Подпишитесь на нашу рассылку!
+        %form.sub-form(novalidate)
+
+          %input.sub-input(ng-model="email" type="email" required ){:placeholder => "Введите E-mail"}
+          %button.btn-sub(ng-click="sendEmail(email)" ){:type => "button"}
+          %br
+          %span(ng-show = "error") Введите правильный адрес электронной почты
+          %span(ng-show = "save") Заявка принята
+
+  .footer-under-line
+    .footer-line
+
+      .costatenerife2013
+        © 2000 «DOROHOUSE»
+        %br
+        Киев, пер.Феодосийский 14, офис 1 (метро Демеевская)
+      .footer-info
+        .footer-info-block
+
+          .secretariat
+            %i
+            %span
+              Секретариат:
+            (044) 228 72 92
+          %br
+          .email
+            %i
+            %span
+              Email:
+            info@dorohouse.com
+        .footer-info-block
+          .phone
+            %i
+            %span
+              Телефон:
+            (067) 234 48 36
+          %br
+          .fax
+            %i
+            %span
+              Факсы:
+            (044) 524 52 45; (044) 524 52 46
+
+
+        -#.include-example{"ng-include" => "'/assets/layouts/socsety.html'"}
+
+
+
+-#.include-example(ng-include="'footer_template.html'" )

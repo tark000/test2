@@ -1,0 +1,37 @@
+-#.modal-close{"ng-click" => "cancel()"}
+
+.modal-email
+  .modal-header
+    Заявка на просмотр
+    .close-modal{"ng-click" => "cancel()"}
+  .modal-body
+
+    .modal-name
+      %input.form-control(ng-model='email.name' placeholder='Ваше имя'  value="{{email.name}}"  ){:type => 'text'}
+
+    .modal-phone
+      %input.form-control(ng-model='email.phone' placeholder='Ваш телефон'  value="{{email.phone}}" type="number" )
+
+    .modal-time
+
+
+
+      %p.input-group
+        %input.form-control(placeholder='Укажите число'){"close-text" => "Close", "date-disabled" => "disabled(date, mode)", "datepicker-popup" => "{{format}}", "is-open" => "opened", :max => "'2020-06-22'", :min => "minDate", "ng-model" => "email.data", "ng-required" => "true", :type => "text"}/
+
+      Укажите время
+      %br
+      %div{"ng-change" => "changed()", "ng-model" => "email.time", :style => "display:inline-block;"}
+        %timepicker(mousewheel="false"){"hour-step" => "hstep", "minute-step" => "mstep", "show-meridian" => "ismeridian"}
+
+
+
+    .send-request(ng-click="sendEmail(email)")
+      Отправить заявку
+    .modal-time(ng-show="showError")
+
+      Неверно заполненые поля
+    .modal-time(ng-show="showMessage")
+
+      Ваше сообщение отправленно
+

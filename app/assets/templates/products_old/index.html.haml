@@ -1,0 +1,61 @@
+.row
+  .large-12.columns
+    %fieldset
+      %legend
+        %small Сортировка
+      .large-12.columns(ng-cloak )
+        %ui-pagination( cur="pagination.cur" total="pagination.total" display="9")
+      .large-3.columns
+        %a.small.tiny.sort_button(ng-click="predicate = 'allPrice'; reverse=!reverse"){href: ""} Цена
+      .large-3.columns
+        %a.small.tiny.sort_button(ng-click="predicate = 'area'; reverse=!reverse"){href: ""} Площадь
+      .large-3.columns
+        %ul.pagination
+          %li(ng-class='page_style'ng-cloak )
+            %a(ng-click="setPrev(currentPage)"  ng-cloak){:href=>''}Prev
+          %li.current
+            %a{:href=>''}
+              {{currentPage}}
+          %li(ng-class='page_style' ng-cloak)
+            %a(ng-click="setNext(currentPage)" ng-cloak ng-disabled="!currentPage>3" ){:href=>''}Next
+
+      .large-3.columns
+        %a.small.tiny.sort_button(ng-click="predicate = 'area'; reverse=!reverse"){href: ""} Площадь
+
+  .large-12.columns
+
+    %ul.large-block-grid-3
+      %li(class="result" ng-repeat="advert in adverts | orderBy:predicate:reverse "  ng-animate="{enter:'animated fadeInLeftBig', leave:'animated bounceInDown'}" ng-cloak  )
+        .index_block
+          %a{href: '/advert/{{advert.id}}'}
+            %figure.effeckt-caption.effeckt-caption-9
+              %img.th.index_img(ng-src="{{advert.photo.photo.medium.url}}" ng-cloak )
+                %figcaption
+                  .effeckt-figcaption-wrap
+                    %h3 Scale
+                    %p Lorem ipsum dolar.
+
+            %table.index_table
+              %tbody.completed
+                %tr
+                  %td
+                  %td
+                %tr
+                  %td
+                    %span(ng-bind="advert.category.name" )
+                  %td
+                    %span(ng-bind="advert.operationType.name" )
+                %tr
+                  %td
+                    Цена:
+                  %td
+                    %span(ng-bind="advert.allPrice | currency:''" )
+                    грн.
+                %tr
+                  %td
+                    Площадь:
+                  %td
+                    %span(ng-bind="advert.area" )
+                    м
+                    %sup
+                      2

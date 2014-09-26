@@ -1,0 +1,127 @@
+.arrow {
+  cursor: pointer;
+  display: block;
+  height: 64px;
+  margin-top: -35px;
+  outline: medium none;
+  position: absolute;
+  top: 50%;
+  width: 64px;
+  z-index: 5;
+}
+.arrow.prev {
+  background-image: url("icon_left_slide_hover.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  left: 20px;
+  opacity: 0.4;
+  transition: all 0.2s linear 0s;
+  /*height: 500px;*/
+}
+.arrow.next {
+  background-image: url("icon_right_slide_hover.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  right: 20px;
+  /*height: 500px;*/
+  transition: all 0.2s linear 0s;
+}
+.arrow.prev:hover{
+  opacity:1;
+}
+.arrow.next:hover{
+  opacity:1;
+}
+
+
+
+.slider {
+  border: 15px solid #FFFFFF;
+  border-radius: 5px;
+  /*height: 500px;*/
+  margin: 5px auto;
+  text-align:center;
+  /*position: relative;*/
+  width: 100%;
+
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -ms-perspective: 1000px;
+  -o-perspective: 1000px;
+  perspective: 1000px;
+
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+/*.slide {*/
+/*position: absolute;*/
+/*top: 0;*/
+/*left: 0;*/
+/*}*/
+.slide.ng-hide-add {
+  opacity:1;
+
+  -webkit-transition:1s linear all;
+  -moz-transition:1s linear all;
+  -o-transition:1s linear all;
+  transition:1s linear all;
+
+  /*-webkit-transform: rotateX(50deg) rotateY(30deg);*/
+  /*-moz-transform: rotateX(50deg) rotateY(30deg);*/
+  /*-ms-transform: rotateX(50deg) rotateY(30deg);*/
+  /*-o-transform: rotateX(50deg) rotateY(30deg);*/
+  /*transform: rotateX(50deg) rotateY(30deg);*/
+
+  -webkit-transform-origin: right top 0;
+  -moz-transform-origin: right top 0;
+  -ms-transform-origin: right top 0;
+  -o-transform-origin: right top 0;
+  transform-origin: right top 0;
+}
+.slide.ng-hide-add.ng-hide-add-active {
+  opacity:0;
+}
+.slide.ng-hide-remove {
+  -webkit-transition:1s linear all;
+  -moz-transition:1s linear all;
+  -o-transition:1s linear all;
+  transition:1s linear all;
+
+  display:block!important;
+  opacity:0;
+}
+.slide, .slide.ng-hide-remove.ng-hide-remove-active {
+  opacity:1;
+}
+
+/*@media (max-width: 900px) {*/
+
+/*.slider {*/
+/*height: 312px;*/
+/*width: 500px;*/
+/*}*/
+/*.slider .slide {*/
+/*width: 100%;*/
+/*}*/
+/*}*/
+/*@media (max-width: 550px) {*/
+
+/*.slider {*/
+/*height: 188px;*/
+/*width: 300px;*/
+/*}*/
+/*.slider .slide {*/
+/*width: 100%;*/
+/*}*/
+
+/*.nav li {*/
+/*border: 3px solid #AAAAAA;*/
+/*border-radius: 3px;*/
+/*height: 15px;*/
+/*width: 25px;*/
+/*}*/
+/*}*/

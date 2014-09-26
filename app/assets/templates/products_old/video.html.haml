@@ -1,0 +1,22 @@
+.row
+  .large-6.columns
+    .row
+      %form{:name => "ContactForm", "ng-submit"=>"send()"}
+        %input{ "ng-model" => "ContactForm.name", :required => "", :placeholder => 'Имя'}
+        %br
+        %br
+        %input{ "ng-model" => "ContactForm.email", :required => "", :placeholder => 'e-mail'}
+        %br
+        %br
+        %textarea{ "ng-model" => "ContactForm.body", :required => "", :placeholder => 'Сообщение'}
+        %br
+        %br
+        %input#submit{:type => "submit", :value => "Отправить"}
+        [
+        %a{:href => "", "ng-click" => "link()"} добавить
+.row
+  .large-12.columns{"ng-bind-html-unsafe" => "advert.video"}
+  .large-12.columns(ng-repeat="video in advert.movies | filter:query"){"ng-bind-html-unsafe" => "video.movie.video"}
+
+
+

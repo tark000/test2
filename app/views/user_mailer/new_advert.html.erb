@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<p>
+
+
+  Адрес: <%= @params[:address] %>
+</p>
+<p>
+  Категория: <%= @params[:category] %>
+</p>
+<p>
+  Этаж/этажность: <%= @params[:flor] %>
+</p>
+<p>
+  Наличие отдельных входов: <%= @params[:enter] %>
+</p>
+<p>
+  Целевое назначение недвижимости: <%= @params[:goal] %>
+</p>
+<p>
+  Метраж: <%= @params[:area] %>
+</p>
+<p>
+  Телефон: <%= @params[:phone] %>
+</p>
+<p>
+  Мейл: <%= @params[:email] %>
+</p>
+<p>
+  Видео: <%= @params[:video] %>
+</p>
+
+<% @images.each do |i|%>
+    <p>
+      <img src=<%= @url + i.image.big.to_s %> >
+
+
+    </p>
+<% end%>
+</body>
+</html>

@@ -1,0 +1,24 @@
+.search-rez
+  .content
+    .include-example{"ng-include" => "'/assets/products/paginate.html'"}
+    .sort-by
+      Сортировать по:
+    .sort-by-price(ng-class="{active:price}" ng-click="filterOrder('price_up')")
+      Цена
+    .arrow-down(ng-click="filterOrder('price_up')" ng-show="priceDown")
+    .arrow-up(ng-click="filterOrder('price_down')" ng-show="priceUp")
+
+    .sort-by-area(ng-class="{active:area}" ng-click="filterOrder('area_up')")
+      Площадь
+    .arrow-down(ng-click="filterOrder('area_up')" ng-show="areaDown")
+    .arrow-up(ng-click="filterOrder('area_down')" ng-show="areaUp")
+
+
+    .index-content
+      %ul.col-lg-12(infinite-scroll='loadMore()' infinite-scroll-immediate-check='false' infinite-scroll-disabled='overhead' infinite-scroll-distance='1')
+
+        %li(class="result" ng-repeat="advert in adverts | orderBy:predicate:reverse | filter:{ marking: marking.value } track by $index" class="my-repeat-animation" ng-style="lineStyle" class="line-new" ng-cloak  )
+
+          .include-example(ng-include="'/assets/products/preview.html'" )
+
+    .include-example{"ng-include" => "'/assets/products/paginate.html'"}

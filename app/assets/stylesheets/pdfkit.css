@@ -1,0 +1,101 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+.id {
+    padding: 20px;
+    float: right;
+    font-size: 20px;
+}
+
+.price {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+table tr, table td{
+    /*border: 1px solid #cccccc;*/
+}
+
+.text {
+    font-size: 18px;
+}
+.value{
+    font-weight: bold;
+}
+
+
+.img {
+    /*margin-bottom: 10px;*/
+    /*margin-left: 5px;*/
+    float: left;
+    /*border: 1px solid #cccccc;*/
+    /*width: 30%;*/
+    /*height: 200px;*/
+}
+
+.page-break{
+    page-break-after: always;
+}
+
+.navbar {
+    color: #333;
+    padding: 0;
+    margin: 0;
+    min-height: 69px;
+    width: 100%;
+    background: url(logo.png) center no-repeat #fff;
+
+}
+
+.content{
+
+    /*height: 811px;*/
+    padding: 0 30px;
+}
+
+.footer{
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    /*height: 114px;*/
+    padding: 15px 50px;
+    /*background-color:  #5F6870;*/
+    color: #355335;
+    font-size: 18px;
+}
+
+.decription{
+    /*height: 320px;*/
+}
+
+.free-space{
+    height: 0px;
+}
+
+.info{
+    text-align: center;
+}
+.big-img{
+    text-align: center;
+}
+
+.param {
+    /*display: block;*/
+    float: left;
+    display: block;
+    width: 30%;
+    border: 1px solid #cccccc;
+    padding: 2px;
+    display: table-cell;
+    line-height: 14px;
+    min-height: 28px;
+    text-align: center;
+}
+
+.params{
+    display: inline-block;
+
+}

@@ -1,0 +1,27 @@
+%div(ui-view="search_main" autoscroll="false")
+
+.main-content
+  .row.main-content-center
+
+    %div(ui-view="index_main" autoscroll="false" )
+    %div(ui-view="new" autoscroll="false")
+
+    .col-lg-3.col-xs-12.col-sm-5
+      %div(ui-view="search_left" autoscroll="false")
+
+      -#%div.hidden-xs(ui-view="catalog_left" autoscroll="false")
+
+    .col-lg-9.col-xs-12.col-sm-7
+
+      %div(ui-view="index" autoscroll="false")
+      %div(ui-view="show" autoscroll="false")
+      %div(ui-view="map" autoscroll="false")
+      %div(ui-view="contact" autoscroll="false")
+      %div(ui-view="posts" autoscroll="false")
+      %div(ui-view="show_post" autoscroll="false")
+      %div(ui-view="show_purchase" autoscroll="false")
+      %div(ui-view="managemen" autoscroll="false")
+      %div(ui-view="lawyer" autoscroll="false")
+      %div(ui-view="notariat" autoscroll="false")
+      %div.hidden-xs(ui-view="catalog_bottom" autoscroll="false")
+

@@ -1,0 +1,17 @@
+%nav#top_bar.breadcrumbs{:style => "margin-bottom: 10px;"}
+  = link_to 'Недвижимость', "/advert"
+
+
+  %a.back_link{:href => "javascript:history.back()", :title => ""}
+    %span назад
+  = Time.now.strftime("%y.%m.%d %H:%M ")
+
+
+  %div
+    - if user_signed_in?
+
+      %a(ui-sref="new({type:new})")
+        Новое обьявление
+
+
+

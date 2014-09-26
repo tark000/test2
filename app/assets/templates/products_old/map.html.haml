@@ -1,0 +1,55 @@
+.row
+  .large-12.columns
+    %fieldset
+      %legend
+        %small
+          Легенда
+      .large-3.columns
+        = link_to image_tag('5.png'), 'adverts_old?map=1&category=5'
+        %span
+          Жилая
+      .large-3.columns.end
+        = image_tag('com.png')
+        %span
+          Коммерческая
+
+  .large-12.columns
+
+
+    %gm-map(gm-map-id="'myMap'" gm-center="center"  class="map" gm-zoom="zoom" gm-bounds="bounds" gm-map-type-id="mapTypeId" )
+      %gm-markers(gm-objects="markers"   gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
+      gm-get-marker-options="getAdvertOpts(object)" gm-on-click="selectAdvert(object, marker)")
+  .large-12.columns
+    %hr
+
+  .large-12.columns
+    %div(ng-show="advert")
+      %ul.large-block-grid-3
+        %li(class='result' ng-repeat="obj in dubl[advert.check].ids" )
+          %a{href: '/advert/{{obj.id}}'}
+            %fieldset
+              %img(ng-src="{{obj.photo.photo.medium.url}}" )
+              %table.index_table
+                %tbody.completed
+                %tr
+                  %td
+                  %td
+                %tr
+                  %td
+                    %span(ng-bind="obj.category.name" )
+                  %td
+                    %span(ng-bind="obj.operationType.name" )
+                %tr
+                  %td
+                    Цена:
+                  %td
+                    %span(ng-bind="obj.allPrice | currency:''" )
+                    грн.
+                %tr
+                  %td
+                    Площадь:
+                  %td
+                    %span(ng-bind="obj.area" )
+                    м
+                    %sup
+                      2

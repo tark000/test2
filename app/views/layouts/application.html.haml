@@ -1,0 +1,30 @@
+!!!
+/ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+/[if lt IE 7 ] <html class=\"ie6\" lang=\"en\">
+/[if IE 7 ]    <html class=\"ie7\" lang=\"en\">
+/[if IE 8 ]    <html class=\"ie8\" lang=\"en\">
+/[if IE 9 ]    <html class=\"ie9\" lang=\"en\">
+/[if (gt IE 9)|!(IE)] <!--> <html lang=\"en\">
+%html(ng-app="realty" ng-cloak)
+  / <![endif]
+  %head
+    %meta{:charset => "utf-8"}/
+    / Uncomment to make IE8 render like IE7
+    / <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    / Set the viewport width to device width for mobile
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title
+      Аренда офисов, кабинетов, складов и магазинов в Киеве без комиссии
+    %meta{:content => "Предлагаем в аренду и покупку только свои обьекты недвижимости по Киеву с 2000 года. Ценим надежных партнеров!", :name => "description"}
+    %meta{:content => "Аренда офиса в Киеве, снять офис без комиссии, магазин в аренду, кабинет, склад, купить нежилое помещение, коммерческая недвижимость, VIP офис в бизнес центре, снять квартиру, аренда коттеджа без посредников, купить дом", :name => "keywords"}/
+    = stylesheet_link_tag    "application", :media => 'all'
+    -#%link{:href => "netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css", :rel => "stylesheet"}
+    = javascript_include_tag "application"
+    = javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false&language=ru"
+
+    -#%script{:src => "http://blueimp.github.com/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"}
+    -#%script{:src => "http://blueimp.github.com/jQuery-File-Upload/js/jquery.fileupload.js"}
+    = csrf_meta_tags
+    %base{:href=>"/"}
+  %body#page.off-canvas.hide-extras
+    = yield
